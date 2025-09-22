@@ -424,7 +424,7 @@
 
         document.body.appendChild(indicator);
 
-        // Auto-hide after 5 seconds
+        // Auto-hide after 1.5 seconds
         setTimeout(() => {
             if (indicator && indicator.parentNode) {
                 indicator.style.transition = 'opacity 0.5s ease';
@@ -435,7 +435,7 @@
                     }
                 }, 500);
             }
-        }, 5000);
+        }, 1500);
     }
 
     function initializeNetworkDetection() {
