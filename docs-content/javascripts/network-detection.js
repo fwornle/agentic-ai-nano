@@ -21,11 +21,12 @@
             hashTriggers: ['session10-corporate-only', 'session10-corporate-content'],
             contentFile: '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'
         },
-        // Coder setup page  
+        // Coder setup page (both concise and detailed via hash)
         '/00_intro/coder/': {
             enabled: true,
-            hashTriggers: [],
-            contentFile: '00_intro/coder-detailed.md'
+            hashTriggers: ['detailed-setup-guide'],
+            contentFile: '00_intro/coder-concise.md',
+            detailedContentFile: '00_intro/coder-detailed.md'
         },
         // LLM API setup page
         '/00_intro/llmapi/': {
