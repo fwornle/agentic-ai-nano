@@ -96,6 +96,14 @@ class ProfessionalPodcastTTS {
         console.log('📋 All available voice names:', voices.map(v => v.name));
         console.log('🌍 Voice languages available:', [...new Set(voices.map(v => v.lang))].sort());
         
+        // Special debug: Look for specific voices the user wants
+        const wantedVoices = voices.filter(v => 
+            v.name.toLowerCase().includes('cello') || 
+            v.name.toLowerCase().includes('spanish') ||
+            v.lang.toLowerCase().includes('es')
+        );
+        console.log('🎯 Found wanted voices (Cello/Spanish):', wantedVoices.map(v => `${v.name} (${v.lang})`));
+        
         if (voices.length === 0) {
             console.warn('🚨 No voices available from speechSynthesis.getVoices()');
             return;
@@ -241,11 +249,16 @@ class ProfessionalPodcastTTS {
         // Add guaranteed voices first
         Object.entries(guaranteedCategories).forEach(([category, maxCount]) => {
             const categoryVoices = voicesByCategory[category] || [];
+            console.log(`🎯 ${category} category has ${categoryVoices.length} voices available, adding ${Math.min(categoryVoices.length, maxCount)}`);
             const voicesToAdd = categoryVoices.slice(0, maxCount);
             voicesToAdd.forEach(v => {
                 const voice = v.voice;
                 voice.displayName = v.label;
                 this.availableVoices.push(voice);
+                // Special logging for wanted voices
+                if (voice.name.toLowerCase().includes('cello') || voice.name.toLowerCase().includes('spanish')) {
+                    console.log(`🎯 IMPORTANT: Added wanted voice: ${voice.name} as ${v.label}`);
+                }
             });
             console.log(`✅ Added ${voicesToAdd.length} ${category} voices`);
         });
@@ -279,84 +292,85 @@ class ProfessionalPodcastTTS {
         });
         console.log('📊 Final voice category distribution:', finalDistribution);
         
-        // Enhanced mobile voice detection - mobile Chrome often needs special handling
-        if (isMobile) {
-            console.log('📱 Mobile device detected, scanning for additional voices...');
+        // Enhanced voice detection for BOTH desktop and mobile - scan for ALL missed voices
+        console.log('🔍 Scanning for additional voices (desktop and mobile)...');
+        
+        // Aggressively scan for ALL available voices on both desktop and mobile
+        voices.forEach(voice => {
+            const name = voice.name.toLowerCase();
+            const lang = voice.lang.toLowerCase();
             
-            // On mobile, aggressively scan for ALL available voices to match desktop
-            voices.forEach(voice => {
-                const name = voice.name.toLowerCase();
-                const lang = voice.lang.toLowerCase();
-                
-                // Skip if already categorized
-                if (Array.from(voiceMap.values()).some(v => v.voice.name === voice.name)) {
-                    return;
-                }
-                
-                let mobileLabel = '';
-                let mobileCategory = 'mobile-extra';
-                
-                // Check for musical/novelty voices that mobile might have
-                if (name.includes('cellos') || name.includes('cello') || 
-                    name.includes('bells') || name.includes('organ') || 
-                    name.includes('pipe') || name.includes('whisper') ||
-                    name.includes('bubbles') || name.includes('albert') ||
-                    name.includes('bad news') || name.includes('good news') ||
-                    name.includes('hysterical') || name.includes('deranged') ||
-                    name.includes('robot') || name.includes('trinoids')) {
-                    mobileLabel = `🎭 ${voice.name}`;
-                    mobileCategory = 'novelty';
-                    console.log('🎭 Found mobile novelty voice:', voice.name);
-                }
-                // Check for non-native English speakers on mobile
-                else if (lang.includes('en') && lang !== 'en-us') {
-                    if (lang.includes('en-gb')) mobileLabel = `Mobile: UK English (${voice.name})`;
-                    else if (lang.includes('en-au')) mobileLabel = `Mobile: Australian (${voice.name})`;
-                    else if (lang.includes('en-za')) mobileLabel = `Mobile: South African (${voice.name})`;
-                    else if (lang.includes('en-in')) mobileLabel = `Mobile: Indian English (${voice.name})`;
-                    else if (lang.includes('en-ie')) mobileLabel = `Mobile: Irish English (${voice.name})`;
-                    else mobileLabel = `Mobile: ${lang.toUpperCase()} English (${voice.name})`;
-                    mobileCategory = 'non-native-accent';
-                }
-                // Check for ANY non-English voices that might speak English
-                else if (!lang.includes('en')) {
-                    // Some mobile systems have multilingual voices that can speak English with accents
-                    if (lang.includes('de')) mobileLabel = `Non-native: German Accent (${voice.name})`;
-                    else if (lang.includes('es')) mobileLabel = `Non-native: Spanish Accent (${voice.name})`;
-                    else if (lang.includes('fr')) mobileLabel = `Non-native: French Accent (${voice.name})`;
-                    else if (lang.includes('it')) mobileLabel = `Non-native: Italian Accent (${voice.name})`;
-                    else if (lang.includes('pt')) mobileLabel = `Non-native: Portuguese Accent (${voice.name})`;
-                    else if (lang.includes('ru')) mobileLabel = `Non-native: Russian Accent (${voice.name})`;
-                    else if (lang.includes('zh')) mobileLabel = `Non-native: Chinese Accent (${voice.name})`;
-                    else if (lang.includes('ja')) mobileLabel = `Non-native: Japanese Accent (${voice.name})`;
-                    else if (lang.includes('ko')) mobileLabel = `Non-native: Korean Accent (${voice.name})`;
-                    else if (lang.includes('hi')) mobileLabel = `Non-native: Hindi Accent (${voice.name})`;
-                    else if (lang.includes('ar')) mobileLabel = `Non-native: Arabic Accent (${voice.name})`;
-                    else if (lang.includes('sv')) mobileLabel = `Non-native: Swedish Accent (${voice.name})`;
-                    else if (lang.includes('no')) mobileLabel = `Non-native: Norwegian Accent (${voice.name})`;
-                    else if (lang.includes('da')) mobileLabel = `Non-native: Danish Accent (${voice.name})`;
-                    else if (lang.includes('nl')) mobileLabel = `Non-native: Dutch Accent (${voice.name})`;
-                    else if (lang.includes('pl')) mobileLabel = `Non-native: Polish Accent (${voice.name})`;
-                    else if (lang.includes('th')) mobileLabel = `Non-native: Thai Accent (${voice.name})`;
-                    else if (lang.includes('vi')) mobileLabel = `Non-native: Vietnamese Accent (${voice.name})`;
-                    mobileCategory = 'non-native-accent';
-                }
-                // Include any other English voices
-                else if (lang.includes('en')) {
-                    mobileLabel = `Mobile: ${voice.name}`;
-                    mobileCategory = 'mobile-extra';
-                }
-                
-                // Add to available voices if we found a label and have space
-                if (mobileLabel && this.availableVoices.length < 35) {
-                    voice.displayName = mobileLabel;
-                    this.availableVoices.push(voice);
-                    console.log('📱 Added mobile voice:', mobileLabel);
-                }
-            });
+            // Skip if already categorized
+            if (Array.from(voiceMap.values()).some(v => v.voice.name === voice.name)) {
+                return;
+            }
             
-            console.log(`📱 Mobile voice enhancement complete: ${this.availableVoices.length} total voices`);
-        }
+            let extraLabel = '';
+            let extraCategory = 'extra-voices';
+            
+            // Check for musical/novelty voices that might be missed (PRIORITY: Cello!)
+            if (name.includes('cellos') || name.includes('cello') || 
+                name.includes('bells') || name.includes('organ') || 
+                name.includes('pipe') || name.includes('whisper') ||
+                name.includes('bubbles') || name.includes('albert') ||
+                name.includes('bad news') || name.includes('good news') ||
+                name.includes('hysterical') || name.includes('deranged') ||
+                name.includes('robot') || name.includes('trinoids')) {
+                extraLabel = `🎭 ${voice.name}`;
+                extraCategory = 'novelty';
+                console.log('🎭 Found missed novelty voice:', voice.name);
+            }
+            // Check for non-native English speakers that might be missed
+            else if (lang.includes('en') && lang !== 'en-us') {
+                if (lang.includes('en-gb')) extraLabel = `Extra: UK English (${voice.name})`;
+                else if (lang.includes('en-au')) extraLabel = `Extra: Australian (${voice.name})`;
+                else if (lang.includes('en-za')) extraLabel = `Extra: South African (${voice.name})`;
+                else if (lang.includes('en-in')) extraLabel = `Extra: Indian English (${voice.name})`;
+                else if (lang.includes('en-ie')) extraLabel = `Extra: Irish English (${voice.name})`;
+                else extraLabel = `Extra: ${lang.toUpperCase()} English (${voice.name})`;
+                extraCategory = 'non-native-accent';
+            }
+            // Check for ANY non-English voices that might speak English (PRIORITY: Spanish!)
+            else if (!lang.includes('en')) {
+                // Some systems have multilingual voices that can speak English with accents
+                if (lang.includes('de')) extraLabel = `Non-native: German Accent (${voice.name})`;
+                else if (lang.includes('es')) {
+                    extraLabel = `Non-native: Spanish Accent (${voice.name})`;
+                    console.log('🇪🇸 Found Spanish accent voice:', voice.name);
+                }
+                else if (lang.includes('fr')) extraLabel = `Non-native: French Accent (${voice.name})`;
+                else if (lang.includes('it')) extraLabel = `Non-native: Italian Accent (${voice.name})`;
+                else if (lang.includes('pt')) extraLabel = `Non-native: Portuguese Accent (${voice.name})`;
+                else if (lang.includes('ru')) extraLabel = `Non-native: Russian Accent (${voice.name})`;
+                else if (lang.includes('zh')) extraLabel = `Non-native: Chinese Accent (${voice.name})`;
+                else if (lang.includes('ja')) extraLabel = `Non-native: Japanese Accent (${voice.name})`;
+                else if (lang.includes('ko')) extraLabel = `Non-native: Korean Accent (${voice.name})`;
+                else if (lang.includes('hi')) extraLabel = `Non-native: Hindi Accent (${voice.name})`;
+                else if (lang.includes('ar')) extraLabel = `Non-native: Arabic Accent (${voice.name})`;
+                else if (lang.includes('sv')) extraLabel = `Non-native: Swedish Accent (${voice.name})`;
+                else if (lang.includes('no')) extraLabel = `Non-native: Norwegian Accent (${voice.name})`;
+                else if (lang.includes('da')) extraLabel = `Non-native: Danish Accent (${voice.name})`;
+                else if (lang.includes('nl')) extraLabel = `Non-native: Dutch Accent (${voice.name})`;
+                else if (lang.includes('pl')) extraLabel = `Non-native: Polish Accent (${voice.name})`;
+                else if (lang.includes('th')) extraLabel = `Non-native: Thai Accent (${voice.name})`;
+                else if (lang.includes('vi')) extraLabel = `Non-native: Vietnamese Accent (${voice.name})`;
+                extraCategory = 'non-native-accent';
+            }
+            // Include any other English voices
+            else if (lang.includes('en')) {
+                extraLabel = `Extra: ${voice.name}`;
+                extraCategory = 'extra-voices';
+            }
+            
+            // Add to available voices if we found a label and have space
+            if (extraLabel && this.availableVoices.length < 40) {
+                voice.displayName = extraLabel;
+                this.availableVoices.push(voice);
+                console.log('🔍 Added extra voice:', extraLabel);
+            }
+        });
+        
+        console.log(`🔍 Extra voice scanning complete: ${this.availableVoices.length} total voices`);
         
         // Fallback if no voices found - especially important on mobile
         if (this.availableVoices.length === 0) {
