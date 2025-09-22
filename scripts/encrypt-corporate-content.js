@@ -64,7 +64,8 @@ function encryptMarkdownFiles(dir, basePath = '') {
         
         files.forEach(file => {
             const fullPath = path.join(dir, file);
-            const relativePath = path.join(basePath, file);
+            // Use forward slashes for consistency across platforms
+            const relativePath = path.join(basePath, file).replace(/\\/g, '/');
             const stat = fs.statSync(fullPath);
             
             if (stat.isDirectory()) {
@@ -95,7 +96,8 @@ function encryptImages(dir, basePath = '') {
         
         files.forEach(file => {
             const fullPath = path.join(dir, file);
-            const relativePath = path.join(basePath, file);
+            // Use forward slashes for consistency across platforms
+            const relativePath = path.join(basePath, file).replace(/\\/g, '/');
             const stat = fs.statSync(fullPath);
             
             if (stat.isDirectory()) {
