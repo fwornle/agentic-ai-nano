@@ -426,175 +426,29 @@
             this.isProcessingContent = true;
             
             try {
-                // Load content if not already loaded
-                if (!this.loadedContent) {
-                    this.loadedContent = await this.loadCorporateContent();
-                }
-                
-                if (this.loadedContent) {
-                    await this.injectContentForCurrentPage(pageConfig);
+                // Use the existing corporate content loader for processing
+                // It has sophisticated markdown processing and image handling
+                if (window.CorporateContentLoader) {
+                    console.log('📄 Triggering corporate content loader for content processing...');
+                    const loaded = await window.CorporateContentLoader.load();
+                    if (loaded) {
+                        console.log('✅ Corporate content loaded and processed by existing loader');
+                        this.networkManager.state.contentLoaded = true;
+                        this.networkManager.emit('content:loaded', { source: 'corporate-content-loader' });
+                    } else {
+                        console.log('❌ Corporate content loader failed to load content');
+                    }
+                } else {
+                    console.error('❌ Corporate content loader not available');
                 }
                 
             } catch (error) {
-                console.error('❌ Failed to load/inject corporate content:', error);
+                console.error('❌ Failed to trigger corporate content loading:', error);
             } finally {
                 this.isProcessingContent = false;
             }
         }
         
-        async loadCorporateContent() {
-            console.log('📥 Loading corporate content...');
-            
-            // Get encrypted content from HTML comments
-            const htmlContent = document.documentElement.outerHTML;
-            const encryptedMatch = htmlContent.match(/ENCRYPTED_CORPORATE_CONTENT_START\s*([\s\S]*?)\s*ENCRYPTED_CORPORATE_CONTENT_END/);
-            
-            if (!encryptedMatch) {
-                console.log('❌ No encrypted content found');
-                return null;
-            }
-            
-            try {
-                const manifest = JSON.parse(encryptedMatch[1].trim());
-                
-                // Use the existing corporate content loader instance
-                if (window.CorporateContentLoader) {
-                    return await this.decryptManifest(manifest, window.CorporateContentLoader);
-                } else {
-                    console.error('❌ Corporate content loader not available');
-                    return null;
-                }
-                
-            } catch (error) {
-                console.error('❌ Failed to decrypt corporate content:', error);
-                return null;
-            }
-        }
-        
-        async decryptManifest(manifest, loader) {
-            const corporateKey = 'bmw-corporate-network-2024-secure';
-            const key = await loader.deriveKey(corporateKey);
-            const decryptedContent = {};
-            
-            if (manifest.files && manifest.content) {
-                // Manifest format
-                for (const [filePath, encryptedData] of Object.entries(manifest.content)) {
-                    try {
-                        decryptedContent[filePath] = await loader.decryptContent(encryptedData, key);
-                    } catch (error) {
-                        console.error(`Failed to decrypt ${filePath}:`, error);
-                    }
-                }
-            }
-            
-            return decryptedContent;
-        }
-        
-        async injectContentForCurrentPage(pageConfig) {
-            const { config } = pageConfig;
-            
-            // For coder page, show concise version by default
-            let targetContent = config.primaryContent;
-            
-            if (this.loadedContent[targetContent]) {
-                console.log(`📄 Injecting corporate content: ${targetContent}`);
-                await this.replacePageContent(this.loadedContent[targetContent]);
-                
-                // Set up detailed content switching for coder page
-                if (config.detailedContent) {
-                    this.setupDetailedContentSwitching(config);
-                }
-                
-                this.networkManager.state.contentLoaded = true;
-                this.networkManager.emit('content:loaded', { contentFile: targetContent });
-                
-            } else {
-                console.warn(`❌ Corporate content not found: ${targetContent}`);
-                console.log('Available content:', Object.keys(this.loadedContent));
-            }
-        }
-        
-        setupDetailedContentSwitching(config) {
-            // Find the detailed setup guide div and set up click handler
-            const detailedDiv = document.getElementById(config.detailHash);
-            if (detailedDiv && config.detailedContent && this.loadedContent[config.detailedContent]) {
-                
-                // Create "show detailed" link if it doesn't exist
-                let showDetailedLink = document.querySelector('a[href="#detailed-setup-guide"]');
-                if (!showDetailedLink) {
-                    // Look for text that should become a link
-                    const linkTexts = ['detailed setup guide', 'detailed information', 'here'];
-                    for (const text of linkTexts) {
-                        const elements = document.querySelectorAll('*');
-                        for (const el of elements) {
-                            if (el.textContent.toLowerCase().includes(text) && 
-                                el.children.length === 0) { // Text node
-                                // Convert to link
-                                el.innerHTML = el.innerHTML.replace(
-                                    new RegExp(`(${text})`, 'gi'),
-                                    `<a href="#${config.detailHash}">$1</a>`
-                                );
-                                showDetailedLink = el.querySelector('a');
-                                break;
-                            }
-                        }
-                        if (showDetailedLink) break;
-                    }
-                }
-                
-                // Set up hash change listener
-                const handleHashChange = () => {
-                    if (window.location.hash === `#${config.detailHash}`) {
-                        console.log('📄 Loading detailed content...');
-                        detailedDiv.innerHTML = this.convertMarkdownToHtml(this.loadedContent[config.detailedContent]);
-                        detailedDiv.style.display = 'block';
-                        detailedDiv.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        detailedDiv.style.display = 'none';
-                    }
-                };
-                
-                window.addEventListener('hashchange', handleHashChange);
-                handleHashChange(); // Check current hash
-            }
-        }
-        
-        convertMarkdownToHtml(markdown) {
-            // Basic markdown conversion
-            let html = markdown;
-            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-            html = html.replace(/\n\n/g, '</p><p>');
-            html = html.replace(/\n/g, '<br>');
-            return `<p>${html}</p>`;
-        }
-        
-        async replacePageContent(markdownContent) {
-            // Find the main content area
-            const contentSelectors = [
-                'article.md-typeset',
-                '.md-content__inner article',
-                '.md-content__inner .md-typeset'
-            ];
-            
-            let contentArea = null;
-            for (const selector of contentSelectors) {
-                contentArea = document.querySelector(selector);
-                if (contentArea) break;
-            }
-            
-            if (!contentArea) {
-                console.error('❌ Could not find content area to replace');
-                return;
-            }
-            
-            console.log('🔄 Replacing page content...');
-            contentArea.innerHTML = this.convertMarkdownToHtml(markdownContent);
-        }
         
         showPublicContent() {
             console.log('🌐 Showing public content');
@@ -626,14 +480,12 @@
         }
         
         disableOldContentLoader() {
-            // Override the old auto-loader to prevent conflicts
+            // Prevent the old loader from auto-triggering but keep its load functionality available
             if (window.CorporateContentLoader) {
-                const originalLoad = window.CorporateContentLoader.load;
-                window.CorporateContentLoader.load = function() {
-                    console.log('🔄 Old corporate content loader disabled - using unified system');
-                    return Promise.resolve(false);
-                };
-                console.log('🔧 Disabled old corporate content loader to prevent conflicts');
+                // Disable auto-detection but preserve the load method for explicit calls
+                window.CorporateContentLoader.autoDetectionDisabled = true;
+                console.log('🔧 Disabled old corporate content loader auto-detection to prevent conflicts');
+                console.log('📋 Corporate content loader load() method preserved for explicit calls');
             }
         }
         
