@@ -642,14 +642,25 @@ class ProfessionalPodcastTTS {
         console.log('⚡ Speed change requested:', speed);
         this.playbackRate = speed;
         
-        // Speed changes require restart to take effect immediately
+        // Try to apply speed change with minimal disruption
         if (this.isPlaying && this.utterance) {
-            console.log('🔄 Restarting current chunk to apply speed immediately...');
-            this.synth.cancel();
-            // Small delay to ensure cancel completes, then restart current chunk
+            // First attempt: Try direct property change (works on some browsers)
+            const oldRate = this.utterance.rate;
+            this.utterance.rate = speed;
+            
+            // Test if the change took effect by checking if the property changed
             setTimeout(() => {
-                this.playCurrentChunk();
-            }, 50);
+                if (Math.abs(this.utterance.rate - speed) > 0.01) {
+                    // Direct change didn't work, need to restart
+                    console.log('🔄 Direct speed change failed, restarting chunk...');
+                    this.synth.cancel();
+                    setTimeout(() => {
+                        this.playCurrentChunk();
+                    }, 30); // Faster restart for less disruption
+                } else {
+                    console.log('⚡ Speed changed directly without restart');
+                }
+            }, 10);
         } else {
             console.log('⚡ Speed will apply when playback starts');
         }
@@ -663,19 +674,26 @@ class ProfessionalPodcastTTS {
         const volumeText = document.getElementById('volume-text');
         if (volumeText) volumeText.textContent = Math.round(volume * 100) + '%';
         
-        // Try to apply volume immediately, but restart if needed for immediate effect
+        // Try to apply volume change with minimal disruption
         if (this.isPlaying && this.utterance) {
-            // First try direct property change (works on some browsers)
+            // First attempt: Try direct property change (works on some browsers)
+            const oldVolume = this.utterance.volume;
             this.utterance.volume = volume;
-            console.log('🔊 Volume applied to current utterance:', Math.round(volume * 100) + '%');
+            console.log('🔊 Attempting direct volume change to:', Math.round(volume * 100) + '%');
             
-            // For browsers where direct volume change doesn't work, restart the chunk
-            // This ensures immediate effect across all browsers
-            console.log('🔄 Restarting current chunk to ensure volume change takes effect...');
-            this.synth.cancel();
+            // Test if the change took effect by checking if the property changed
             setTimeout(() => {
-                this.playCurrentChunk();
-            }, 50);
+                if (Math.abs(this.utterance.volume - volume) > 0.05) {
+                    // Direct change didn't work, need to restart
+                    console.log('🔄 Direct volume change failed, restarting chunk...');
+                    this.synth.cancel();
+                    setTimeout(() => {
+                        this.playCurrentChunk();
+                    }, 30); // Faster restart for less disruption
+                } else {
+                    console.log('🔊 Volume changed directly without restart');
+                }
+            }, 10);
         } else {
             console.log('🔊 Volume will apply when playback starts:', Math.round(volume * 100) + '%');
         }

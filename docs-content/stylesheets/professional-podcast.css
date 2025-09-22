@@ -504,10 +504,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: rgba(255, 255, 255, 0.8);
     font-size: 12px;
     margin-bottom: 8px;
     cursor: pointer;
+    /* Color is handled by light/dark mode specific rules above */
 }
 
 .advanced-options input[type="checkbox"] {
