@@ -2,6 +2,8 @@
 
 **Advanced AI Agent Development & Protocol Integration** - A comprehensive 6-week self-paced program covering modern AI agent development, from foundational patterns through cutting-edge protocols and production deployment.
 
+> **🔒 Corporate Content Security Notice**: This repository contains only public course materials. BMW-specific corporate content is delivered securely through automatic network detection and encryption - no sensitive corporate information is stored in this public repository or exposed outside BMW corporate networks.
+
 ## 🚀 Quick Start
 
 **[Start Here: Cloud Development Environment](docs-content/00_intro/coder.md)** - Access your pre-configured workspace at `http://10.21.202.14/workspaces`
@@ -128,9 +130,9 @@ git submodule update  # Fetch corporate content
 
 ## Corporate Content Availability
 
-This nanodegree features **automatic corporate network (CN) detection** that unlocks additional content when accessed from BMW corporate networks. No manual configuration required - the system automatically detects your network environment and serves appropriate content.
+This nanodegree features **automatic corporate network (CN) detection** that securely unlocks additional BMW-specific content when accessed from BMW corporate networks. **Important**: Sensitive corporate content is never stored in this public repository or exposed outside the BMW corporate network.
 
-### How Content Access Works
+### How Secure Content Access Works
 
 **🌐 Public Network Access:**
 - Generic course materials suitable for all audiences
@@ -138,13 +140,22 @@ This nanodegree features **automatic corporate network (CN) detection** that unl
 - Public LLM API configuration (OpenAI, Anthropic, etc.)
 - Standard 9-session course structure per module
 
-**🏢 BMW Corporate Network Access:**
+**🏢 BMW Corporate Network Access (Secure):**
 - **Automatic Detection**: System detects corporate network via IP ranges and internal service accessibility
-- **Enhanced Content**: Corporate-specific examples, configurations, and deployment guides
+- **Encrypted Content Delivery**: Corporate content is encrypted and only decryptable from BMW networks
+- **Enhanced Content**: BMW-specific examples, configurations, and deployment guides
 - **Additional Sessions**: Access to Session 10 "Enterprise Integration & Production Deployment"
 - **Cloud Development Environment**: Pre-configured BMW Coder workspace access
 - **BMW Gaia LLM API**: Internal LLM service integration
 - **Corporate Infrastructure**: BMW-specific architecture diagrams and integration patterns
+
+### Security & Content Protection
+
+**🔒 Content Security Model:**
+- **No Sensitive Data in Repository**: Corporate content is never stored in plaintext in this public repository
+- **Encrypted Distribution**: Corporate content is AES-256-GCM encrypted before inclusion in public deployments
+- **Network-Based Decryption**: Content can only be decrypted and viewed from BMW corporate networks
+- **Automatic Fallback**: Public users always see appropriate generic content without corporate details
 
 ### Network Detection Indicators
 
@@ -215,21 +226,36 @@ git submodule init && git submodule update
 ### Content Structure
 
 ```
-nano-degree/
+nano-degree/ (Public Repository)
 ├── docs-content/
-│   ├── corporate-only/              # Private submodule (corporate users only)
-│   │   ├── 00_intro/coder-detailed.md    # Corporate environment details
-│   │   ├── 03_mcp-acp-a2a/Session10*    # Corporate enterprise deployment
-│   │   ├── images/corp-*.png            # Corporate-specific diagrams
-│   │   ├── puml/corp-*.puml             # Corporate architecture diagrams
-│   │   ├── content.encrypted.json       # Encrypted content manifest
-│   │   └── test.encrypted.json          # Decryption test file
-│   ├── 00_intro/coder.md            # Conditional content (corporate/public)
+│   ├── 00_intro/coder.md            # Generic setup guide (corporate content injected dynamically)
+│   ├── 01_frameworks/               # Public course content
+│   ├── 02_rag/                      # Public course content  
+│   ├── 03_mcp-acp-a2a/             # Public course content (Session 10 added dynamically)
 │   └── javascripts/
-│       ├── network-detection.js      # Corporate network detection
-│       └── corporate-content-loader.js # Content decryption system
-└── scripts/encrypt-corporate-content.js # Encryption utility
+│       ├── network-detection-unified.js  # Network detection & content injection
+│       └── corporate-content-loader.js   # Legacy loader (deprecated)
+├── scripts/
+│   ├── encrypt-corporate-content.js      # Content encryption utility
+│   └── inject-corporate-content.js       # Build-time content injection
+└── site/                            # Built site (contains encrypted corporate content in HTML comments)
+    └── **/*.html                    # Pages with encrypted content embedded for CN decryption
+
+corporate-only/ (Private Repository - Referenced as Submodule)
+├── content.encrypted.json           # AES-256-GCM encrypted content bundle
+├── 00_intro/
+│   ├── coder-concise.md             # Compact BMW Coder setup guide  
+│   ├── coder-detailed.md            # Detailed BMW environment setup
+│   └── llmapi-detailed.md           # BMW Gaia LLM API documentation
+├── 03_mcp-acp-a2a/
+│   └── Session10_Enterprise_Integration_Production_Deployment.md
+└── images/                          # BMW-specific diagrams (encrypted)
+    ├── bmw-*.png                    # Corporate architecture diagrams
+    ├── coder-*.png                  # Development environment screenshots
+    └── cn-*.png                     # Corporate network diagrams
 ```
+
+**Security Note**: The `corporate-only/` directory is a private Git submodule. Corporate content is encrypted before being embedded in the public deployment and can only be decrypted from BMW corporate networks.
 
 ### Content Publishing Workflow
 
@@ -246,25 +272,44 @@ nano-degree/
 
 ### Development Workflow
 
-**Managing Corporate Content:**
+**For Corporate Content Maintainers (BMW Internal Only):**
 ```bash
-# Update corporate content
+# Note: This workflow requires access to the private corporate-only repository
+
+# 1. Update corporate content (private repository)
 cd docs-content/corporate-only
 # Make changes to corporate files
 git add . && git commit -m "Update corporate content"
 git push origin main
 
-# Encrypt for public deployment
+# 2. Encrypt for public deployment (main repository)
+cd ../../
 node scripts/encrypt-corporate-content.js
 
-# Test decryption (corporate network only)
-# Access from corporate network - decryption tested automatically
+# 3. Deploy encrypted content
+git add docs-content/corporate-only
+git commit -m "Update encrypted corporate content"
+git push origin main
+
+# 4. Test from corporate network
+# Access deployed site - decryption tested automatically
 ```
 
-**Content Guidelines:**
-- Use conditional divs: `<div class="corp-corporate-only">` and `<div class="corp-public-alternative">`
-- Corporate images: Store in `corporate-only/images/` with relative paths
-- Reference corporate content: Use `../corporate-only/` paths from public content
+**For Public Contributors:**
+```bash
+# Standard contribution workflow - no access to corporate content required
+git clone https://github.com/fwornle/agentic-ai-nano.git
+cd agentic-ai-nano
+# Make changes to public content only
+git add . && git commit -m "Update public content"
+git push origin main
+```
+
+**Content Security Guidelines:**
+- **Corporate Content**: Never include BMW-specific details in public content files
+- **Generic Alternatives**: Always provide generic alternatives for corporate-specific instructions
+- **Conditional Content**: Use automatic network detection rather than manual switches
+- **Images**: Corporate images are encrypted and stored separately from public repository
 
 ### Security Features
 
