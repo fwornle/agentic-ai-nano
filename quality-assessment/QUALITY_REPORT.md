@@ -72,8 +72,6 @@
 **32 unused professional diagrams available for course enhancement:**
 
 ### Framework Diagrams (21 diagrams)
-- [`adk-agent.png`](../docs-content/01_frameworks/images/adk-agent.png) - ADK agent core components  
-- [`adk-architecture-overview.png`](../docs-content/01_frameworks/images/adk-architecture-overview.png) - Complete ADK system architecture
 - [`adk-authentication.svg`](../docs-content/01_frameworks/images/adk-authentication.svg) - ADK authentication flow
 - [`adk-event-loop.png`](../docs-content/01_frameworks/images/adk-event-loop.png) - ADK event loop visualization
 - [`adk-mcp.png`](../docs-content/01_frameworks/images/adk-mcp.png) - ADK MCP integration patterns
@@ -99,7 +97,6 @@
 - [`RAG-universal.webp`](../docs-content/02_rag/images/RAG-universal.webp) - Universal RAG architecture
 
 ### MCP/A2A Communication Diagrams (6 diagrams)
-- [`a2a-overview.png`](../docs-content/03_mcp-acp-a2a/images/a2a-overview.png) - A2A communication overview
 - [`mcp-a2a-combo.png`](../docs-content/03_mcp-acp-a2a/images/mcp-a2a-combo.png) - Combined MCP/A2A architecture
 - [`mcp-acp-a2a-use-cases.png`](../docs-content/03_mcp-acp-a2a/images/mcp-acp-a2a-use-cases.png) - Use cases diagram
 - [`advanced-workflow-architecture.png`](../docs-content/03_mcp-acp-a2a/images/advanced-workflow-architecture.png) - Advanced workflow patterns

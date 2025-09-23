@@ -8,7 +8,13 @@ This is the reality of modern AI systems. Your weather prediction agent in the c
 
 *Welcome to Agent-to-Agent (A2A) Communication—where artificial minds learn the art of diplomacy, cooperation, and collective intelligence.*
 
+![Agent-to-Agent Communication](images/a2a-overview.png)
+*A2A Communication Overview*
+
+The following diagram outlines the main classes involved in A2A.
+
 ![A2A Communication Architecture](images/a2a-communication-architecture.png)
+*A2A Architecture Overview*
 
 ## 🎯📝⚙️ Learning Path Overview
 
