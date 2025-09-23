@@ -4,6 +4,9 @@ Picture the most effective data engineering team you've worked with - maybe it w
 
 Now imagine building that same coordination with AI agents - each with specialized data processing expertise, clear responsibilities, and natural collaboration patterns. This is exactly what CrewAI enables: transforming isolated data processing capabilities into coordinated teams that work together like your best engineering collaborators ever did.
 
+![CrewAI Workflows](images/crewai-workflows.png)  
+*CrewAI workflows - crews interact to create a flow*
+
 In this session, you'll learn to orchestrate AI agents that don't just execute data processing tasks, but truly collaborate to handle complex data engineering workflows requiring multiple types of expertise and deep domain knowledge.
 
 ## 🎯📝⚙️ Learning Path Overview

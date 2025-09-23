@@ -199,8 +199,7 @@ The result bridges the semantic gap between user intent and document content, dr
 
 For detailed implementation of all HyDE components including query type templates, document generation, and embedding optimization, see:
 
-**📝 Participant Path**: [HyDE Implementation Guide](Session4_HyDE_Implementation.md) - Step-by-step practical implementation
-**⚙️ Implementer Path**: <!-- [Advanced HyDE Systems](Session4_Advanced_HyDE_Systems.md) (Module not yet implemented) --> - Production-ready systems with optimization
+**📝 Participant Path**: [HyDE Implementation Guide](Session4_HyDE_Implementation.md) - Step-by-step practical implementation  
 
 ## 🎯 Part 2: Query Expansion and Reformulation - Casting a Wider Net
 
@@ -358,8 +357,7 @@ For detailed implementation of all query expansion components including:
 - **Domain-Specific Expansion**: Using corpus knowledge for specialized terminology  
 - **Multi-Strategy Coordination**: Combining all expansion approaches  
 
-**📝 Participant Path**: [Query Expansion Practice](Session4_Query_Expansion_Practice.md) - Hands-on implementation guide
-**⚙️ Implementer Path**: <!-- [Multi-Query Systems](Session4_Multi_Query_Systems.md) (Module not yet implemented) --> - Production-ready multi-query generation
+**📝 Participant Path**: [Query Expansion Practice](Session4_Query_Expansion_Practice.md) - Hands-on implementation guide  
 
 ## 🎯 Part 3: Context Window Optimization - Making Every Token Count
 
@@ -476,8 +474,7 @@ For detailed implementation of all context optimization techniques including:
 - **Diversity-Based Selection**: Balancing relevance with information coverage  
 - **Strategy Selection Logic**: Choosing optimal approaches based on content characteristics  
 
-**📝 Participant Path**: [Context Optimization Methods](Session4_Context_Optimization.md) - Practical optimization techniques
-**⚙️ Implementer Path**: <!-- [Advanced Context Systems](Session4_Advanced_Context_Systems.md) (Module not yet implemented) --> - Production-ready optimization
+**📝 Participant Path**: [Context Optimization Methods](Session4_Context_Optimization.md) - Practical optimization techniques  
 
 ## 🎯 Part 4: Advanced Prompt Engineering for RAG - Getting the Best Response
 

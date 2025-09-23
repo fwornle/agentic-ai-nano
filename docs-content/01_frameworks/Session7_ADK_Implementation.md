@@ -7,6 +7,11 @@
 
 In this hands-on implementation guide, you'll build sophisticated ADK agents optimized for enterprise data processing workloads. You'll create agents that handle real-world complexity: streaming data validation, distributed batch processing, multi-stage data transformation pipelines, and the production monitoring that keeps enterprise data systems running smoothly at scale.
 
+An overview of how these classes and components interact can be found in the following architecture component overview:
+
+![ADK Agent Architecture](images/adk-agent-architecture.png)  
+*ADK agent architecture - overview of fundamental ADK classes*
+
 ## Building Your First Production Data Processing Agent
 
 Let's create sophisticated ADK agents optimized for enterprise data processing workloads:
