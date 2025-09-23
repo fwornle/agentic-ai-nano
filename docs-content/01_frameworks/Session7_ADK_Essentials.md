@@ -12,6 +12,9 @@ ADK bridges the gap between prototype-friendly frameworks and enterprise data pr
 
 ADK provides enterprise-ready agent development with sophisticated orchestration, built-in monitoring, and production deployment patterns. Designed for large-scale data processing and multi-tenant environments, ADK includes comprehensive tooling for data pipeline management, advanced MCP integration for data source connectivity, and enterprise features that traditional frameworks lack for production data processing workloads.
 
+![ADK Agents](images/adk-agent.png)
+*ADK agent core components*
+
 ### Core Learning Outcomes
 
 By completing this Observer Path, you will understand:
@@ -115,7 +118,7 @@ Comprehensive audit trails, encryption, and access controls for data processing 
 
 ADK's MCP integration provides enterprise-grade connectivity to data processing systems:
 
-![ADK MCP Integration](images/adk-mcp.png)
+![ADK MCP Integration](images/adk-mcp.png)  
 *ADK's sophisticated MCP integration enables seamless connectivity to enterprise data processing systems including data lakes, streaming platforms, and distributed storage systems. The integration provides built-in connection pooling, failover handling, and comprehensive monitoring essential for production data processing environments.*
 
 ### Essential MCP Components
