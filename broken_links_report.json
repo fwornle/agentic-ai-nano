@@ -1,0 +1,1054 @@
+{
+  "summary": {
+    "total_links": 1204,
+    "broken_links": 4,
+    "success_rate": 99.66777408637874,
+    "broken_by_type": {
+      "markdown": 4
+    }
+  },
+  "broken_links": [
+    {
+      "file_path": "docs-content/03_mcp-acp-a2a/Session2_FileSystem_MCP_Server.md",
+      "line_number": 484,
+      "line_content": "- \u2699\ufe0f <!-- [Enterprise File Operations](Session2_Enterprise_File_Operations.md) (Link disabled - target file not found) --> - Advanced file manipulation and monitoring",
+      "link_text": "Enterprise File Operations",
+      "url": "Session2_Enterprise_File_Operations.md",
+      "is_valid": false,
+      "check_info": "tried_['Session2_Enterprise_File_Operations.md', '/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session2_Enterprise_File_Operations.md', '/Users/q284340/Agentic/nano-degree/Session2_Enterprise_File_Operations.md', '/Users/q284340/Agentic/nano-degree/docs-content/Session2_Enterprise_File_Operations.md']",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/02_rag/Session4_Query_Enhancement_Context_Augmentation.md",
+      "line_number": 203,
+      "line_content": "**\u2699\ufe0f Implementer Path**: <!-- [Advanced HyDE Systems](Session4_Advanced_HyDE_Systems.md) (Module not yet implemented) --> - Production-ready systems with optimization",
+      "link_text": "Advanced HyDE Systems",
+      "url": "Session4_Advanced_HyDE_Systems.md",
+      "is_valid": false,
+      "check_info": "tried_['Session4_Advanced_HyDE_Systems.md', '/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session4_Advanced_HyDE_Systems.md', '/Users/q284340/Agentic/nano-degree/Session4_Advanced_HyDE_Systems.md', '/Users/q284340/Agentic/nano-degree/docs-content/Session4_Advanced_HyDE_Systems.md']",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/02_rag/Session4_Query_Enhancement_Context_Augmentation.md",
+      "line_number": 362,
+      "line_content": "**\u2699\ufe0f Implementer Path**: <!-- [Multi-Query Systems](Session4_Multi_Query_Systems.md) (Module not yet implemented) --> - Production-ready multi-query generation",
+      "link_text": "Multi-Query Systems",
+      "url": "Session4_Multi_Query_Systems.md",
+      "is_valid": false,
+      "check_info": "tried_['Session4_Multi_Query_Systems.md', '/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session4_Multi_Query_Systems.md', '/Users/q284340/Agentic/nano-degree/Session4_Multi_Query_Systems.md', '/Users/q284340/Agentic/nano-degree/docs-content/Session4_Multi_Query_Systems.md']",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/02_rag/Session4_Query_Enhancement_Context_Augmentation.md",
+      "line_number": 480,
+      "line_content": "**\u2699\ufe0f Implementer Path**: <!-- [Advanced Context Systems](Session4_Advanced_Context_Systems.md) (Module not yet implemented) --> - Production-ready optimization",
+      "link_text": "Advanced Context Systems",
+      "url": "Session4_Advanced_Context_Systems.md",
+      "is_valid": false,
+      "check_info": "tried_['Session4_Advanced_Context_Systems.md', '/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session4_Advanced_Context_Systems.md', '/Users/q284340/Agentic/nano-degree/Session4_Advanced_Context_Systems.md', '/Users/q284340/Agentic/nano-degree/docs-content/Session4_Advanced_Context_Systems.md']",
+      "pattern_type": "markdown"
+    }
+  ],
+  "all_links": [
+    {
+      "file_path": "README.md",
+      "line_number": 9,
+      "line_content": "**[Start Here: Cloud Development Environment](docs-content/00_intro/coder.md)** - Access your pre-configured workspace at `http://10.21.202.14/workspaces`",
+      "link_text": "Start Here: Cloud Development Environment",
+      "url": "docs-content/00_intro/coder.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/00_intro/coder.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 12,
+      "line_content": "1. **[Cloud Environment Setup](docs-content/00_intro/coder.md)** - Pre-configured workspace with all dependencies",
+      "link_text": "Cloud Environment Setup",
+      "url": "docs-content/00_intro/coder.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/00_intro/coder.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 13,
+      "line_content": "2. **[LLM API Configuration](docs-content/00_intro/llmapi.md)** - Gaia API access for AI models",
+      "link_text": "LLM API Configuration",
+      "url": "docs-content/00_intro/llmapi.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/00_intro/llmapi.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 14,
+      "line_content": "3. **[\ud83c\udfa7 Podcast Mode](docs/podcast-feature.md)** - Learn hands-free while commuting",
+      "link_text": "\ud83c\udfa7 Podcast Mode",
+      "url": "docs/podcast-feature.md",
+      "is_valid": true,
+      "check_info": "found_at_docs/podcast-feature.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 22,
+      "line_content": "**[Start Module 01 \u2192](docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md)**",
+      "link_text": "Start Module 01 \u2192",
+      "url": "docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 29,
+      "line_content": "**[Start Module 02 \u2192](docs-content/02_rag/Session0_Introduction_to_RAG_Architecture.md)**",
+      "link_text": "Start Module 02 \u2192",
+      "url": "docs-content/02_rag/Session0_Introduction_to_RAG_Architecture.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/02_rag/Session0_Introduction_to_RAG_Architecture.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 36,
+      "line_content": "**[Start Module 03 \u2192](docs-content/03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md)**",
+      "link_text": "Start Module 03 \u2192",
+      "url": "docs-content/03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 78,
+      "line_content": "1. **[Access Coder Workspace](docs-content/00_intro/coder.md)** - `http://10.21.202.14/workspaces`",
+      "link_text": "Access Coder Workspace",
+      "url": "docs-content/00_intro/coder.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/00_intro/coder.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 79,
+      "line_content": "2. **[Configure LLM API](docs-content/00_intro/llmapi.md)** - Gaia API setup",
+      "link_text": "Configure LLM API",
+      "url": "docs-content/00_intro/llmapi.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/00_intro/llmapi.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 80,
+      "line_content": "3. **[Enable Podcast Mode](docs/podcast-feature.md)** - Learn while commuting",
+      "link_text": "Enable Podcast Mode",
+      "url": "docs/podcast-feature.md",
+      "is_valid": true,
+      "check_info": "found_at_docs/podcast-feature.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 118,
+      "line_content": "- **[Interactive Documentation](http://127.0.0.1:8001)** - Full browsing experience with search",
+      "link_text": "Interactive Documentation",
+      "url": "http://127.0.0.1:8001",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 119,
+      "line_content": "- **[Live Demo Site](https://fwornle.github.io/agentic-ai-nano)** - GitHub Pages deployment",
+      "link_text": "Live Demo Site",
+      "url": "https://fwornle.github.io/agentic-ai-nano",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 122,
+      "line_content": "- **[Module 01: Frameworks](docs-content/01_frameworks/)** - Agent patterns and frameworks",
+      "link_text": "Module 01: Frameworks",
+      "url": "docs-content/01_frameworks/",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/01_frameworks",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 123,
+      "line_content": "- **[Module 02: RAG](docs-content/02_rag/)** - Advanced retrieval and reasoning systems",
+      "link_text": "Module 02: RAG",
+      "url": "docs-content/02_rag/",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/02_rag",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 124,
+      "line_content": "- **[Module 03: Protocols](docs-content/03_mcp-acp-a2a/)** - Agent communication and integration",
+      "link_text": "Module 03: Protocols",
+      "url": "docs-content/03_mcp-acp-a2a/",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/03_mcp-acp-a2a",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 127,
+      "line_content": "- **[Source Code Examples](docs-content/01_frameworks/src/)** - Complete implementations",
+      "link_text": "Source Code Examples",
+      "url": "docs-content/01_frameworks/src/",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/01_frameworks/src",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 128,
+      "line_content": "- **[Architecture Diagrams](docs-content/01_frameworks/puml/)** - PlantUML system diagrams",
+      "link_text": "Architecture Diagrams",
+      "url": "docs-content/01_frameworks/puml/",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/01_frameworks/puml",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 129,
+      "line_content": "- **[Podcast Feature Guide](docs/podcast-feature.md)** - Hands-free learning setup",
+      "link_text": "Podcast Feature Guide",
+      "url": "docs/podcast-feature.md",
+      "is_valid": true,
+      "check_info": "found_at_docs/podcast-feature.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 333,
+      "line_content": "**[\ud83d\ude80 Start Your Journey: Setup Cloud Workspace \u2192](docs-content/00_intro/coder.md)**",
+      "link_text": "\ud83d\ude80 Start Your Journey: Setup Cloud Workspace \u2192",
+      "url": "docs-content/00_intro/coder.md",
+      "is_valid": true,
+      "check_info": "found_at_docs-content/00_intro/coder.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "README.md",
+      "line_number": 335,
+      "line_content": "Transform your commute into productive learning time with our **[\ud83c\udfa7 Podcast Mode](docs/podcast-feature.md)** - perfect for hands-free learning while driving!",
+      "link_text": "\ud83c\udfa7 Podcast Mode",
+      "url": "docs/podcast-feature.md",
+      "is_valid": true,
+      "check_info": "found_at_docs/podcast-feature.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/getting-started.md",
+      "line_number": 7,
+      "line_content": "1. **Set Up Environment**: Configure your development environment - see [Setup & Environment](00_intro/coder.md)",
+      "link_text": "Setup & Environment",
+      "url": "00_intro/coder.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/00_intro/coder.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/getting-started.md",
+      "line_number": 8,
+      "line_content": "2. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md), [RAG Architecture](02_rag/index.md), or [MCP & Agent Protocols](03_mcp-acp-a2a/index.md)",
+      "link_text": "Agent Frameworks",
+      "url": "01_frameworks/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/getting-started.md",
+      "line_number": 8,
+      "line_content": "2. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md), [RAG Architecture](02_rag/index.md), or [MCP & Agent Protocols](03_mcp-acp-a2a/index.md)",
+      "link_text": "RAG Architecture",
+      "url": "02_rag/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/02_rag/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/getting-started.md",
+      "line_number": 8,
+      "line_content": "2. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md), [RAG Architecture](02_rag/index.md), or [MCP & Agent Protocols](03_mcp-acp-a2a/index.md)",
+      "link_text": "MCP & Agent Protocols",
+      "url": "03_mcp-acp-a2a/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/getting-started.md",
+      "line_number": 304,
+      "line_content": "[Start with Agent Frameworks \u2192](01_frameworks/index.md){ .md-button .md-button--primary }",
+      "link_text": "Start with Agent Frameworks \u2192",
+      "url": "01_frameworks/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/getting-started.md",
+      "line_number": 305,
+      "line_content": "[Begin with RAG Architecture \u2192](02_rag/index.md){ .md-button }",
+      "link_text": "Begin with RAG Architecture \u2192",
+      "url": "02_rag/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/02_rag/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/getting-started.md",
+      "line_number": 306,
+      "line_content": "[Master Agent Communication \u2192](03_mcp-acp-a2a/index.md){ .md-button }",
+      "link_text": "Master Agent Communication \u2192",
+      "url": "03_mcp-acp-a2a/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/index.md",
+      "line_number": 5,
+      "line_content": "![Agents Everywhere](00_intro/images/agents-everywhere.png)",
+      "link_text": "Agents Everywhere",
+      "url": "00_intro/images/agents-everywhere.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/00_intro/images/agents-everywhere.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/index.md",
+      "line_number": 5,
+      "line_content": "![Agents Everywhere](00_intro/images/agents-everywhere.png)",
+      "link_text": "Agents Everywhere",
+      "url": "00_intro/images/agents-everywhere.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/00_intro/images/agents-everywhere.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/index.md",
+      "line_number": 132,
+      "line_content": "![Agentic Value](00_intro/images/agentic-what-is-it.png)",
+      "link_text": "Agentic Value",
+      "url": "00_intro/images/agentic-what-is-it.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/00_intro/images/agentic-what-is-it.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/index.md",
+      "line_number": 132,
+      "line_content": "![Agentic Value](00_intro/images/agentic-what-is-it.png)",
+      "link_text": "Agentic Value",
+      "url": "00_intro/images/agentic-what-is-it.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/00_intro/images/agentic-what-is-it.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/index.md",
+      "line_number": 253,
+      "line_content": "[Get Started with Agent Frameworks \u2192](01_frameworks/index.md){ .md-button .md-button--primary }",
+      "link_text": "Get Started with Agent Frameworks \u2192",
+      "url": "01_frameworks/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/index.md",
+      "line_number": 254,
+      "line_content": "[Explore RAG Architecture \u2192](02_rag/index.md){ .md-button }",
+      "link_text": "Explore RAG Architecture \u2192",
+      "url": "02_rag/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/02_rag/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/index.md",
+      "line_number": 255,
+      "line_content": "[Master Agent Communication \u2192](03_mcp-acp-a2a/index.md){ .md-button }",
+      "link_text": "Master Agent Communication \u2192",
+      "url": "03_mcp-acp-a2a/index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
+      "line_number": 1504,
+      "line_content": "- **Continue to Module B**: [Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md) for deployment patterns",
+      "link_text": "Production Multi-Agent Systems",
+      "url": "Session9_ModuleB_Production_Multi_Agent_Systems.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_ModuleB_Production_Multi_Agent_Systems.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
+      "line_number": 1505,
+      "line_content": "- **Return to Core**: [Session 9 Main](Session9_Multi_Agent_Patterns.md)",
+      "link_text": "Session 9 Main",
+      "url": "Session9_Multi_Agent_Patterns.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
+      "line_number": 1562,
+      "line_content": "[View Solutions \u2192](Session9_Test_Solutions.md)",
+      "link_text": "View Solutions \u2192",
+      "url": "Session9_Test_Solutions.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Test_Solutions.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
+      "line_number": 1568,
+      "line_content": "**Previous:** [Session 8 - Production Ready \u2192](Session8_Agno_Production_Ready_Agents.md)",
+      "link_text": "Session 8 - Production Ready \u2192",
+      "url": "Session8_Agno_Production_Ready_Agents.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session8_Agno_Production_Ready_Agents.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
+      "line_number": 1569,
+      "line_content": "**Next:** [Session 10 - Enterprise Integration \u2192](Session10_Enterprise_Integration_Production_Deployment.md)",
+      "link_text": "Session 10 - Enterprise Integration \u2192",
+      "url": "Session10_Enterprise_Integration_Production_Deployment.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Test_Solutions.md",
+      "line_number": 49,
+      "line_content": "**Back to Test:** [Session 2 Test Questions \u2192](Session2_LangChain_Foundations.md#multiple-choice-test-session-2)",
+      "link_text": "Session 2 Test Questions \u2192",
+      "url": "Session2_LangChain_Foundations.md#multiple-choice-test-session-2",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_LangChain_Foundations.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 4,
+      "line_content": "> Prerequisites: Complete [\ud83c\udfaf Observer Path](Session2_LangChain_Foundations.md) and [\ud83d\udcdd Participant Path](Session2_Practical_Implementation.md)",
+      "link_text": "\ud83c\udfaf Observer Path",
+      "url": "Session2_LangChain_Foundations.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_LangChain_Foundations.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 4,
+      "line_content": "> Prerequisites: Complete [\ud83c\udfaf Observer Path](Session2_LangChain_Foundations.md) and [\ud83d\udcdd Participant Path](Session2_Practical_Implementation.md)",
+      "link_text": "\ud83d\udcdd Participant Path",
+      "url": "Session2_Practical_Implementation.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_Practical_Implementation.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1216,
+      "line_content": "- [\ud83c\udfaf LangChain Tool Basics](Session2_LangChain_Foundations.md) - Core tool creation and usage patterns",
+      "link_text": "\ud83c\udfaf LangChain Tool Basics",
+      "url": "Session2_LangChain_Foundations.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_LangChain_Foundations.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1217,
+      "line_content": "- [\ud83d\udcdd Production Tool Implementation](Session2_Practical_Implementation.md) - Practical tool development with error handling",
+      "link_text": "\ud83d\udcdd Production Tool Implementation",
+      "url": "Session2_Practical_Implementation.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_Practical_Implementation.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1224,
+      "line_content": "- [\u2699\ufe0f Advanced Agent Architecture](Session2_Advanced_Agent_Architecture.md) - Sophisticated orchestration patterns",
+      "link_text": "\u2699\ufe0f Advanced Agent Architecture",
+      "url": "Session2_Advanced_Agent_Architecture.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_Advanced_Agent_Architecture.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1225,
+      "line_content": "- [\u2699\ufe0f Production Memory Systems](Session2_Production_Memory_Systems.md) - Enterprise state management and persistence",
+      "link_text": "\u2699\ufe0f Production Memory Systems",
+      "url": "Session2_Production_Memory_Systems.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_Production_Memory_Systems.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1228,
+      "line_content": "- [Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md) - Specialized tool creation patterns",
+      "link_text": "Custom Tool Development",
+      "url": "Session2_ModuleC_Custom_Tool_Development.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_ModuleC_Custom_Tool_Development.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1229,
+      "line_content": "- [Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md) - Enterprise deployment & monitoring",
+      "link_text": "Production Deployment Strategies",
+      "url": "Session2_ModuleB_Production_Deployment_Strategies.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_ModuleB_Production_Deployment_Strategies.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1230,
+      "line_content": "- [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) - System optimization & observability",
+      "link_text": "Performance Monitoring",
+      "url": "Session2_ModuleD_Performance_Monitoring.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_ModuleD_Performance_Monitoring.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1236,
+      "line_content": "**Previous:** [Session 1 - Foundations \u2192](Session1_Bare_Metal_Agents.md)",
+      "link_text": "Session 1 - Foundations \u2192",
+      "url": "Session1_Bare_Metal_Agents.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session1_Bare_Metal_Agents.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_Enterprise_Tool_Development.md",
+      "line_number": 1237,
+      "line_content": "**Next:** [Session 3 - Advanced Patterns \u2192](Session3_Multi_Agent_Implementation.md)",
+      "link_text": "Session 3 - Advanced Patterns \u2192",
+      "url": "Session3_Multi_Agent_Implementation.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session3_Multi_Agent_Implementation.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session5_ModuleC_Test_Solutions.md",
+      "line_number": 65,
+      "line_content": "**Back to Test:** [Session 5 Test Questions \u2192](Session5_PydanticAI_Type_Safe_Agents.md#multiple-choice-test-session-5)",
+      "link_text": "Session 5 Test Questions \u2192",
+      "url": "Session5_PydanticAI_Type_Safe_Agents.md#multiple-choice-test-session-5",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session5_PydanticAI_Type_Safe_Agents.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session10_ModuleB_Enterprise_Operations_Scaling.md",
+      "line_number": 1773,
+      "line_content": "- **Return to Core**: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)",
+      "link_text": "Session 10 Main",
+      "url": "Session10_Enterprise_Integration_Production_Deployment.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session10_ModuleB_Enterprise_Operations_Scaling.md",
+      "line_number": 1774,
+      "line_content": "- **Continue to Module A**: [Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)",
+      "link_text": "Advanced Security & Compliance",
+      "url": "Session10_ModuleA_Advanced_Security_Compliance.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session10_ModuleA_Advanced_Security_Compliance.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session10_ModuleB_Enterprise_Operations_Scaling.md",
+      "line_number": 1830,
+      "line_content": "[View Solutions \u2192](Session10_Test_Solutions.md)",
+      "link_text": "View Solutions \u2192",
+      "url": "Session10_Test_Solutions.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session10_Test_Solutions.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session10_ModuleB_Enterprise_Operations_Scaling.md",
+      "line_number": 1836,
+      "line_content": "**Previous:** [Session 9 - Multi-Agent Coordination \u2192](Session9_Practical_Coordination.md)",
+      "link_text": "Session 9 - Multi-Agent Coordination \u2192",
+      "url": "Session9_Practical_Coordination.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Practical_Coordination.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session10_ModuleB_Enterprise_Operations_Scaling.md",
+      "line_number": 1837,
+      "line_content": "**Next:** [Course Home \u2192](../index.md)",
+      "link_text": "Course Home \u2192",
+      "url": "../index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/index.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session7_ModuleA_Test_Solutions.md",
+      "line_number": 60,
+      "line_content": "**Back to Test:** [Session 7 Test Questions \u2192](Session7_First_ADK_Agent.md#multiple-choice-test-session-7)",
+      "link_text": "Session 7 Test Questions \u2192",
+      "url": "Session7_First_ADK_Agent.md#multiple-choice-test-session-7",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session7_First_ADK_Agent.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session7_Test_Solutions.md",
+      "line_number": 99,
+      "line_content": "**Back to Test:** [Session 7 Test Questions \u2192](Session7_First_ADK_Agent.md#multiple-choice-test-session-7)",
+      "link_text": "Session 7 Test Questions \u2192",
+      "url": "Session7_First_ADK_Agent.md#multiple-choice-test-session-7",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session7_First_ADK_Agent.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session2_ModuleB_Test_Solutions.md",
+      "line_number": 37,
+      "line_content": "**Back to Test:** [Session 2 Test Questions \u2192](Session2_ModuleD_Performance_Monitoring.md#multiple-choice-test-session-2)",
+      "link_text": "Session 2 Test Questions \u2192",
+      "url": "Session2_ModuleD_Performance_Monitoring.md#multiple-choice-test-session-2",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session2_ModuleD_Performance_Monitoring.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 37,
+      "line_content": "**Code Files**: All examples use files in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9)",
+      "link_text": "`src/session9/`",
+      "url": "https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 48,
+      "line_content": "![ReAct Pattern](images/react-pattern.png)",
+      "link_text": "ReAct Pattern",
+      "url": "images/react-pattern.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/react-pattern.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 48,
+      "line_content": "![ReAct Pattern](images/react-pattern.png)",
+      "link_text": "ReAct Pattern",
+      "url": "images/react-pattern.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/react-pattern.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 51,
+      "line_content": "**File**: [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - Core ReAct implementation",
+      "link_text": "`src/session9/react_agent.py`",
+      "url": "https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 105,
+      "line_content": "![Multi-Agent Pattern](images/multi-agent-pattern.png)",
+      "link_text": "Multi-Agent Pattern",
+      "url": "images/multi-agent-pattern.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/multi-agent-pattern.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 105,
+      "line_content": "![Multi-Agent Pattern](images/multi-agent-pattern.png)",
+      "link_text": "Multi-Agent Pattern",
+      "url": "images/multi-agent-pattern.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/multi-agent-pattern.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 108,
+      "line_content": "**File**: [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Data flow communication framework",
+      "link_text": "`src/session9/multi_agent_coordination.py`",
+      "url": "https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 167,
+      "line_content": "![Planning Pattern](images/planning-pattern.png)",
+      "link_text": "Planning Pattern",
+      "url": "images/planning-pattern.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/planning-pattern.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 167,
+      "line_content": "![Planning Pattern](images/planning-pattern.png)",
+      "link_text": "Planning Pattern",
+      "url": "images/planning-pattern.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/planning-pattern.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 222,
+      "line_content": "**File**: [`src/session9/production_deployment.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/production_deployment.py) - Production data processing patterns",
+      "link_text": "`src/session9/production_deployment.py`",
+      "url": "https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/production_deployment.py",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 282,
+      "line_content": "- [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - ReAct pattern for data processing",
+      "link_text": "`src/session9/react_agent.py`",
+      "url": "https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 283,
+      "line_content": "- [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Multi-agent data coordination",
+      "link_text": "`src/session9/multi_agent_coordination.py`",
+      "url": "https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 303,
+      "line_content": "- **For practical work**: Continue with \ud83d\udcdd [Session9_Practical_Coordination.md](Session9_Practical_Coordination.md)",
+      "link_text": "Session9_Practical_Coordination.md",
+      "url": "Session9_Practical_Coordination.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Practical_Coordination.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 304,
+      "line_content": "- **For deep expertise**: Explore \u2699\ufe0f [Session9_Advanced_ReAct.md](Session9_Advanced_ReAct.md)",
+      "link_text": "Session9_Advanced_ReAct.md",
+      "url": "Session9_Advanced_ReAct.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Advanced_ReAct.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 341,
+      "line_content": "[View Solutions \u2192](Session9_Test_Solutions.md)",
+      "link_text": "View Solutions \u2192",
+      "url": "Session9_Test_Solutions.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Test_Solutions.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 347,
+      "line_content": "**Previous:** [Session 8 - Production Ready \u2192](Session8_Agno_Production_Ready_Agents.md)",
+      "link_text": "Session 8 - Production Ready \u2192",
+      "url": "Session8_Agno_Production_Ready_Agents.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session8_Agno_Production_Ready_Agents.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "line_number": 348,
+      "line_content": "**Next:** [Session 10 - Enterprise Integration \u2192](Session10_Enterprise_Integration_Production_Deployment.md)",
+      "link_text": "Session 10 - Enterprise Integration \u2192",
+      "url": "Session10_Enterprise_Integration_Production_Deployment.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 9,
+      "line_content": "![Agent Frameworks Architecture](images/framework-comparison-matrix.png)",
+      "link_text": "Agent Frameworks Architecture",
+      "url": "images/framework-comparison-matrix.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/framework-comparison-matrix.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 9,
+      "line_content": "![Agent Frameworks Architecture](images/framework-comparison-matrix.png)",
+      "link_text": "Agent Frameworks Architecture",
+      "url": "images/framework-comparison-matrix.png",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/images/framework-comparison-matrix.png",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 194,
+      "line_content": "- [LangChain Agent Documentation](https://python.langchain.com/docs/modules/agents/)",
+      "link_text": "LangChain Agent Documentation",
+      "url": "https://python.langchain.com/docs/modules/agents/",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 195,
+      "line_content": "- [LangGraph Tutorial](https://langchain-ai.github.io/langgraph/)",
+      "link_text": "LangGraph Tutorial",
+      "url": "https://langchain-ai.github.io/langgraph/",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 196,
+      "line_content": "- [CrewAI Official Guide](https://docs.crewai.com/)",
+      "link_text": "CrewAI Official Guide",
+      "url": "https://docs.crewai.com/",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 197,
+      "line_content": "- [PydanticAI Documentation](https://ai.pydantic.dev/)",
+      "link_text": "PydanticAI Documentation",
+      "url": "https://ai.pydantic.dev/",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 198,
+      "line_content": "- [Google ADK Repository](https://github.com/google/adk-python)",
+      "link_text": "Google ADK Repository",
+      "url": "https://github.com/google/adk-python",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 202,
+      "line_content": "- [Building AI Agents with LangChain](https://www.youtube.com/results?search_query=langchain+agents+tutorial)",
+      "link_text": "Building AI Agents with LangChain",
+      "url": "https://www.youtube.com/results?search_query=langchain+agents+tutorial",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 203,
+      "line_content": "- [Multi-Agent Systems with LangGraph](https://www.youtube.com/results?search_query=langgraph+tutorial)",
+      "link_text": "Multi-Agent Systems with LangGraph",
+      "url": "https://www.youtube.com/results?search_query=langgraph+tutorial",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 204,
+      "line_content": "- [CrewAI Team Building Tutorial](https://www.youtube.com/results?search_query=crewai+tutorial)",
+      "link_text": "CrewAI Team Building Tutorial",
+      "url": "https://www.youtube.com/results?search_query=crewai+tutorial",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 208,
+      "line_content": "- [LangChain Agent Quickstart](https://python.langchain.com/docs/tutorials/agents/)",
+      "link_text": "LangChain Agent Quickstart",
+      "url": "https://python.langchain.com/docs/tutorials/agents/",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 209,
+      "line_content": "- [Building Your First CrewAI Team](https://docs.crewai.com/quickstart)",
+      "link_text": "Building Your First CrewAI Team",
+      "url": "https://docs.crewai.com/quickstart",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 210,
+      "line_content": "- [PydanticAI Getting Started](https://ai.pydantic.dev/getting-started/)",
+      "link_text": "PydanticAI Getting Started",
+      "url": "https://ai.pydantic.dev/getting-started/",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 211,
+      "line_content": "- [ADK Currency Agent Codelab](https://codelabs.developers.google.com/codelabs/currency-agent#0)",
+      "link_text": "ADK Currency Agent Codelab",
+      "url": "https://codelabs.developers.google.com/codelabs/currency-agent#0",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 215,
+      "line_content": "- [Agent Architecture Patterns](https://arxiv.org/html/2406.02716v1)",
+      "link_text": "Agent Architecture Patterns",
+      "url": "https://arxiv.org/html/2406.02716v1",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 216,
+      "line_content": "- [Multi-Agent System Design](https://arxiv.org/html/2310.02238v2)",
+      "link_text": "Multi-Agent System Design",
+      "url": "https://arxiv.org/html/2310.02238v2",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 217,
+      "line_content": "- [ReAct: Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)",
+      "link_text": "ReAct: Reasoning and Acting in Language Models",
+      "url": "https://arxiv.org/abs/2210.03629",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 218,
+      "line_content": "- [Tool-Using AI Agents](https://arxiv.org/html/2410.03739v1)",
+      "link_text": "Tool-Using AI Agents",
+      "url": "https://arxiv.org/html/2410.03739v1",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 222,
+      "line_content": "- [LangChain Examples](https://github.com/langchain-ai/langchain/tree/master/templates)",
+      "link_text": "LangChain Examples",
+      "url": "https://github.com/langchain-ai/langchain/tree/master/templates",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 223,
+      "line_content": "- [LangGraph Templates](https://github.com/langchain-ai/langgraph/tree/main/examples)",
+      "link_text": "LangGraph Templates",
+      "url": "https://github.com/langchain-ai/langgraph/tree/main/examples",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 224,
+      "line_content": "- [CrewAI Examples](https://github.com/joaomdmoura/crewAI-examples)",
+      "link_text": "CrewAI Examples",
+      "url": "https://github.com/joaomdmoura/crewAI-examples",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 225,
+      "line_content": "- [PydanticAI Examples](https://github.com/pydantic/pydantic-ai/tree/main/examples)",
+      "link_text": "PydanticAI Examples",
+      "url": "https://github.com/pydantic/pydantic-ai/tree/main/examples",
+      "is_valid": true,
+      "check_info": "external",
+      "pattern_type": "markdown"
+    },
+    {
+      "file_path": "docs-content/01_frameworks/Agent_Frameworks_Nanodegree_Curriculum.md",
+      "line_number": 365,
+      "line_content": "**Back to:** [Module Index \u2190](index.md)",
+      "link_text": "Module Index \u2190",
+      "url": "index.md",
+      "is_valid": true,
+      "check_info": "found_at_/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/index.md",
+      "pattern_type": "markdown"
+    }
+  ]
+}

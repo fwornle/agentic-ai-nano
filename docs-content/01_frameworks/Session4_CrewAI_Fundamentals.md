@@ -82,6 +82,11 @@ These principles mirror what makes successful data engineering teams effective:
 
 3. **Collaborative Workflow**: Agents hand off work in structured sequences - creating smooth, efficient collaboration patterns that mirror successful data engineering team structures  
 
+An overview of how these classes and components interact can be found in the following architecture component overview:
+
+![CrewAI Architecture Overview](images/crewai-architecture.png)  
+*CrewAI classes - architecture overview showing agents and their specialisations*
+
 ### Agent Role Definitions
 
 Creating effective agent roles that bring specialized expertise to your data processing teams:

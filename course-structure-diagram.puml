@@ -80,8 +80,8 @@ rectangle "**🤖 MODULE 01: AGENT FRAMEWORKS**" #F3E5F5 {
     [S9_Practical📝] as F_S9_PRAC
   }
   
-  rectangle "**Session 10**" #E8F5E8 {
-    [S10_Enterprise] as F_S10
+  rectangle "**Session 10 🏢 CORPORATE**" #FFE0B2 {
+    [S10_Enterprise🏢] as F_S10
   }
   
   rectangle "**SessionX Modules** (⚙️ Implementer)" #FFF8E1 {
@@ -141,10 +141,18 @@ rectangle "**🌐 MODULE 03: MCP-ACP-A2A**" #F3E5F5 {
     [M6_ACP] as M_S6
     [M7_A2A] as M_S7
     [M9_Production] as M_S9
+    [M10_Enterprise🏢] as M_S10
   }
   
   rectangle "**MCP Modules** (⚙️ Implementer)" #FFF8E1 {
     [M3_ModA-B] as M_MODS
+  }
+  
+  rectangle "**🏢 Corporate Content**" #FFE0B2 {
+    [BMW Coder Setup] as CORP_CODER
+    [Gaia LLM API] as CORP_GAIA
+    [BMW Images\n(bmw-*, coder-*, cn-*)] as CORP_IMGS
+    [Session 10 Enterprise\nIntegration Content] as CORP_S10
   }
 }
 
@@ -242,8 +250,15 @@ M_S4 --> M_S5 : "Next"
 M_S5 --> M_S6 : "Next"
 M_S6 --> M_S7 : "Next"
 M_S7 --> M_S9 : "Next"
+M_S9 --> M_S10 : "Enterprise\n🏢"
 
 M_MODS --> M_S4 : "Prerequisites"
+
+' Corporate Content Integration
+CORP_CODER -.-> CODER : "BMW Network\nDetection"
+CORP_S10 -.-> F_S10 : "Enhanced\nContent"
+CORP_S10 -.-> M_S10 : "Enhanced\nContent"
+CORP_GAIA -.-> F_S10 : "Internal\nLLM API"
 
 ' Cross-Module Integration
 F_S9 ..> R_S9 : "Enterprise\nIntegration"
@@ -251,11 +266,19 @@ F_S9 ..> R_S9 : "Enterprise\nIntegration"
 ' Legend
 note bottom 
   **🎯 Observer (40-60 min)** | **📝 Participant (2-3 hours)** | **⚙️ Implementer (6-8 hours)**
+  **🏢 Corporate Content** - Available only on BMW corporate networks
   
   **⚠️ Navigation Issues:**
   • getting-started.md is ORPHANED (referenced but doesn't exist)
   • No direct navigation from setup (coder.md) to modules
   • Users must return to index.md after setup
+  
+  **🏢 Corporate Features:**
+  • Session 10 Enterprise Integration (Modules 01 & 03)
+  • BMW Coder cloud development environment
+  • Gaia LLM API internal access
+  • Corporate-specific images and examples
+  • Encrypted content delivery via network detection
 end note
 
 @enduml
