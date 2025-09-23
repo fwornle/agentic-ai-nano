@@ -8,9 +8,9 @@ This document provides a comprehensive index of images used across modules 00-03
 
 ## Summary Statistics
 
-- **Public Images**: 57 references ✅
+- **Public Images**: 60 references ✅
 - **Corporate Images**: 11 references 🏢
-- **Truly Missing**: ~30 framework diagrams ❌
+- **Truly Missing**: ~27 framework diagrams ❌
 - **Course Structure**: Professional multi-tier content delivery 🗺️
 
 ---
@@ -67,7 +67,7 @@ This document provides a comprehensive index of images used across modules 00-03
 
 ---
 
-### Module 01: Agent Frameworks (41 working images)
+### Module 01: Agent Frameworks (44 working images)
 
 #### [docs-content/01_frameworks/index.md](docs-content/01_frameworks/index.md)
 
@@ -103,6 +103,18 @@ This document provides a comprehensive index of images used across modules 00-03
 
 <img src="docs-content/01_frameworks/images/langchain-overview.svg" alt="LangChain Overview" width="200"/> **LangChain Overview** → [Line 47](docs-content/01_frameworks/Session2_LangChain_Foundations.md#L47)
 
+#### [docs-content/01_frameworks/Session4_CrewAI_Fundamentals.md](docs-content/01_frameworks/Session4_CrewAI_Fundamentals.md)
+
+<img src="docs-content/01_frameworks/images/crewai-architecture.png" alt="CrewAI Architecture Overview" width="200"/> **CrewAI Architecture Overview** → [Line 87](docs-content/01_frameworks/Session4_CrewAI_Fundamentals.md#L87)
+
+#### [docs-content/01_frameworks/Session4_CrewAI_Team_Orchestration.md](docs-content/01_frameworks/Session4_CrewAI_Team_Orchestration.md)
+
+<img src="docs-content/01_frameworks/images/crewai-workflows.png" alt="CrewAI Workflows" width="200"/> **CrewAI Workflows** → [Line 7](docs-content/01_frameworks/Session4_CrewAI_Team_Orchestration.md#L7)
+
+#### [docs-content/01_frameworks/Session7_ADK_Implementation.md](docs-content/01_frameworks/Session7_ADK_Implementation.md)
+
+<img src="docs-content/01_frameworks/images/adk-agent-architecture.png" alt="ADK Agent Architecture" width="200"/> **ADK Agent Architecture** → [Line 12](docs-content/01_frameworks/Session7_ADK_Implementation.md#L12)
+
 #### [docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md](docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md)
 
 <img src="docs-content/01_frameworks/images/react-pattern.png" alt="ReAct Pattern" width="200"/> **ReAct Pattern** → [Line 48](docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md#L48)
@@ -119,7 +131,6 @@ This document provides a comprehensive index of images used across modules 00-03
 
 **🔧 Integration Opportunities** - These professional diagrams exist but aren't referenced in documentation:
 
-- `adk-agent-architecture.png` - ADK agent architecture diagram
 - `adk-agent.png` - ADK agent overview  
 - `adk-architecture-overview.png` - Complete ADK architecture
 - `adk-authentication.svg` - ADK authentication flow
@@ -137,9 +148,7 @@ This document provides a comprehensive index of images used across modules 00-03
 - `atomic-agents.png` - Multiple atomic agents
 - `atomic-assembler.png` - Atomic assembler pattern
 - `atomic-llm-use.png` - Atomic LLM usage
-- `crewai-architecture.png` - CrewAI architecture overview ⭐
-- `crewai-overview.png` - CrewAI framework overview ⭐  
-- `crewai-workflows.png` - CrewAI workflow patterns ⭐
+- `crewai-overview.png` - CrewAI framework overview ⭐
 - `overview-agents.png` - General agent overview
 - `pydantic-ai.png` - PydanticAI framework diagram
 
@@ -335,8 +344,8 @@ Both reference the hub document as prerequisites:
 ### 🔧 Integration Opportunities (Not Broken - Just Unused)
 
 **Framework Diagrams Ready for Integration:**
-1. **CrewAI Framework** (3 unused images) - High priority for Session 4
-2. **ADK Framework** (6 unused images) - Ready for Session 7 integration  
+1. **CrewAI Framework** (1 unused image) - `crewai-overview.png` ready for Session 4
+2. **ADK Framework** (5 unused images) - Ready for Session 7 integration  
 3. **Atomic Agents** (4 unused images) - Ready for advanced patterns
 4. **Agent Patterns** (6 unused images) - Ready for detailed pattern explanations
 

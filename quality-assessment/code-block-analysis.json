@@ -1,0 +1,17 @@
+{
+  "summary": {
+    "total_files": 1,
+    "files_needing_refactoring": 0,
+    "total_large_blocks": 0
+  },
+  "files": [
+    {
+      "file": "/Users/q284340/Agentic/nano-degree/image-reference-guide.md",
+      "total_code_blocks": 0,
+      "large_blocks_count": 0,
+      "code_blocks": [],
+      "large_blocks": [],
+      "needs_refactoring": false
+    }
+  ]
+}
