@@ -178,6 +178,11 @@ class DataAggregationAgent(BaseAgent):
 
 This aggregation component provides focused functionality for combining multiple data streams, essential for batch processing and stream windowing operations.
 
+The following graph outlines how a typical Atomic Agent interacts with tools and LLMs (via user + system prompts).
+
+![Atomic Agents and how they interact with LLMs](images/atomic-llm-use.png)
+*Atomic LLM usage patterns*  
+
 ### Component Coordination Patterns
 
 Now let's see how these specialized components work together in a coordinated system:
