@@ -8,9 +8,9 @@ This document provides a comprehensive index of images used across modules 00-03
 
 ## Summary Statistics
 
-- **Public Images**: 60 references ✅
+- **Public Images**: 67 references ✅
 - **Corporate Images**: 11 references 🏢
-- **Truly Missing**: ~27 framework diagrams ❌
+- **Truly Missing**: ~21 framework diagrams ❌
 - **Course Structure**: Professional multi-tier content delivery 🗺️
 
 ---
@@ -67,7 +67,7 @@ This document provides a comprehensive index of images used across modules 00-03
 
 ---
 
-### Module 01: Agent Frameworks (44 working images)
+### Module 01: Agent Frameworks (49 working images)
 
 #### [../docs-content/01_frameworks/index.md](../docs-content/01_frameworks/index.md)
 
@@ -115,6 +115,24 @@ This document provides a comprehensive index of images used across modules 00-03
 
 <img src="../docs-content/01_frameworks/images/adk-agent-architecture.png" alt="ADK Agent Architecture" width="200"/> **ADK Agent Architecture** → [Line 12](../docs-content/01_frameworks/Session7_ADK_Implementation.md#L12)
 
+#### [../docs-content/01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md](../docs-content/01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md)
+
+<img src="../docs-content/01_frameworks/images/atomic-agents.png" alt="Atomic Agents Overview" width="200"/> **Atomic Agents Overview** → [Line 35](../docs-content/01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md#L35)
+
+<img src="../docs-content/01_frameworks/images/atomic-agent.png" alt="Atomic Agent Pattern" width="200"/> **Atomic Agent Pattern** → [Line 58](../docs-content/01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md#L58)
+
+#### [../docs-content/01_frameworks/Session6_Building_Atomic_Components.md](../docs-content/01_frameworks/Session6_Building_Atomic_Components.md)
+
+<img src="../docs-content/01_frameworks/images/atomic-llm-use.png" alt="Atomic LLM Usage Patterns" width="200"/> **Atomic LLM Usage Patterns** → [Line 183](../docs-content/01_frameworks/Session6_Building_Atomic_Components.md#L183)
+
+#### [../docs-content/01_frameworks/Session7_ADK_Essentials.md](../docs-content/01_frameworks/Session7_ADK_Essentials.md)
+
+<img src="../docs-content/01_frameworks/images/adk-agent.png" alt="ADK Agent Core Components" width="200"/> **ADK Agent Core Components** → [Line 15](../docs-content/01_frameworks/Session7_ADK_Essentials.md#L15)
+
+<img src="../docs-content/01_frameworks/images/adk-architecture-overview.png" alt="ADK Enterprise Architecture" width="200"/> **ADK Enterprise Architecture** → [Line 31](../docs-content/01_frameworks/Session7_ADK_Essentials.md#L31)
+
+<img src="../docs-content/01_frameworks/images/adk-mcp.png" alt="ADK MCP Integration" width="200"/> **ADK MCP Integration** → [Line 121](../docs-content/01_frameworks/Session7_ADK_Essentials.md#L121)
+
 #### [../docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md](../docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md)
 
 <img src="../docs-content/01_frameworks/images/react-pattern.png" alt="ReAct Pattern" width="200"/> **ReAct Pattern** → [Line 48](../docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md#L48)
@@ -131,11 +149,8 @@ This document provides a comprehensive index of images used across modules 00-03
 
 **🔧 Integration Opportunities** - These professional diagrams exist but aren't referenced in documentation:
 
-- `adk-agent.png` - ADK agent overview  
-- `adk-architecture-overview.png` - Complete ADK architecture
 - `adk-authentication.svg` - ADK authentication flow
 - `adk-event-loop.png` - ADK event loop visualization
-- `adk-mcp.png` - ADK MCP integration
 - `agent-pattern-control.png` - Agent control pattern
 - `agent-pattern-parallelize.png` - Parallelization pattern
 - `agent-pattern-reflect.png` - Reflection pattern detailed
@@ -144,10 +159,7 @@ This document provides a comprehensive index of images used across modules 00-03
 - `agent-pattern-tool-integration.png` - Tool integration
 - `agno-agent.png` - Agno agent architecture
 - `agno-telemetry-debugging.png` - Agno debugging tools
-- `atomic-agent.png` - Atomic agent pattern
-- `atomic-agents.png` - Multiple atomic agents
 - `atomic-assembler.png` - Atomic assembler pattern
-- `atomic-llm-use.png` - Atomic LLM usage
 - `crewai-overview.png` - CrewAI framework overview ⭐
 - `overview-agents.png` - General agent overview
 - `pydantic-ai.png` - PydanticAI framework diagram
@@ -205,7 +217,7 @@ This document provides a comprehensive index of images used across modules 00-03
 
 ---
 
-### Module 03: MCP-ACP-A2A (24 working images)
+### Module 03: MCP-ACP-A2A (25 working images)
 
 #### [../docs-content/03_mcp-acp-a2a/index.md](../docs-content/03_mcp-acp-a2a/index.md)
 
@@ -251,6 +263,10 @@ This document provides a comprehensive index of images used across modules 00-03
 
 <img src="../docs-content/03_mcp-acp-a2a/images/mcp-security-architecture.png" alt="MCP Security Architecture" width="200"/> **MCP Security Architecture** → [Session5_Secure_MCP_Server.md](../docs-content/03_mcp-acp-a2a/Session5_Secure_MCP_Server.md)
 
+#### [../docs-content/03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md](../docs-content/03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md)
+
+<img src="../docs-content/03_mcp-acp-a2a/images/a2a-overview.png" alt="A2A Communication Overview" width="200"/> **A2A Communication Overview** → [Line 11](../docs-content/03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md#L11)
+
 ### Corporate BMW Images 🏢
 
 **Available on BMW corporate networks only:**
@@ -261,7 +277,6 @@ This document provides a comprehensive index of images used across modules 00-03
 
 ### Available MCP Images (Not Yet Referenced)
 
-- `a2a-overview.png` - A2A communication overview
 - `mcp-a2a-combo.png` - Combined MCP/A2A architecture
 - `mcp-acp-a2a-use-cases.png` - Use cases diagram
 - `advanced-workflow-architecture.png` - Advanced workflow patterns
@@ -290,10 +305,10 @@ This document provides a comprehensive index of images used across modules 00-03
 | Category | Public | Corporate | Total |
 |----------|--------|-----------|-------|
 | Module 00 | 7 | 11 | 18 |
-| Module 01 | 41 | 0 | 41 |
+| Module 01 | 49 | 0 | 49 |
 | Module 02 | 13 | 0 | 13 |
-| Module 03 | 21 | 3 | 24 |
-| **Total** | **82** | **14** | **96** |
+| Module 03 | 25 | 3 | 28 |
+| **Total** | **94** | **14** | **108** |
 
 ---
 
