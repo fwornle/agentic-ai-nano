@@ -86,9 +86,7 @@
 - [`atomic-agent.png`](../docs-content/01_frameworks/images/atomic-agent.png) - Atomic agent pattern
 - [`atomic-agents.png`](../docs-content/01_frameworks/images/atomic-agents.png) - Multiple atomic agents
 - [`atomic-assembler.png`](../docs-content/01_frameworks/images/atomic-assembler.png) - Atomic assembler pattern
-- [`atomic-llm-use.png`](../docs-content/01_frameworks/images/atomic-llm-use.png) - Atomic LLM usage patterns
 - [`crewai-overview.png`](../docs-content/01_frameworks/images/crewai-overview.png) - CrewAI framework overview ⭐  
-- [`overview-agents.png`](../docs-content/01_frameworks/images/overview-agents.png) - General agent overview
 - [`pydantic-ai.png`](../docs-content/01_frameworks/images/pydantic-ai.png) - PydanticAI framework diagram
 - [`framework-comparison-matrix.png`](../docs-content/01_frameworks/images/framework-comparison-matrix.png) - Framework comparison
 
