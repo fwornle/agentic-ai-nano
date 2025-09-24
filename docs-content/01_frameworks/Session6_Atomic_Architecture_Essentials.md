@@ -79,10 +79,10 @@ Building data processing systems through component assembly mirrors the patterns
 
 ### Data Processing Stages
 
-**Ingestion Agents**: Specialize in reading data from various sources
-**Transformation Agents**: Handle schema conversion and data mapping
-**Validation Agents**: Ensure data quality and schema compliance
-**Output Agents**: Manage data writing and distribution
+**Ingestion Agents**: Specialize in reading data from various sources  
+**Transformation Agents**: Handle schema conversion and data mapping  
+**Validation Agents**: Ensure data quality and schema compliance  
+**Output Agents**: Manage data writing and distribution  
 
 ### Composition Example
 
