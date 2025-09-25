@@ -244,7 +244,8 @@
       "Bash(GH_HOST=github.com gh run view --log --job=50855511166)",
       "Bash(GH_HOST=github.com gh run view --log --job=50867091573)",
       "Bash(cp:*)",
-      "Bash(TRANSCRIPT_SOURCE_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" timeout 30s node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --debug --timeframe=\"2025-09-21_0700-0900\" --search=\"CN content\")"
+      "Bash(TRANSCRIPT_SOURCE_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" timeout 30s node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --debug --timeframe=\"2025-09-21_0700-0900\" --search=\"CN content\")",
+      "mcp__serena__write_memory"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
