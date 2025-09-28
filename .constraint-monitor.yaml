@@ -1,0 +1,190 @@
+constraint_groups:
+  - id: code_quality
+    name: Code Quality Standards
+    description: Basic code quality and best practices
+    icon: 🔧
+    color: "#4CAF50"
+  - id: security
+    name: Security Requirements
+    description: Security-focused constraints and vulnerability prevention
+    icon: 🔒
+    color: "#F44336"
+  - id: architecture
+    name: Architecture Guidelines
+    description: Development practices and architectural standards
+    icon: 🏗️
+    color: "#2196F3"
+  - id: plantuml
+    name: PlantUML Standards
+    description: Diagram creation and PlantUML workflow standards
+    icon: 📊
+    color: "#9C27B0"
+  - id: documentation
+    name: Documentation Standards
+    description: Documentation format and organization requirements
+    icon: 📚
+    color: "#FF9800"
+  - id: framework_specific
+    name: Framework-Specific Rules
+    description: Framework and library specific constraints (can be enabled per project)
+    icon: ⚛️
+    color: "#607D8B"
+constraints:
+  - id: no-console-log
+    group: code_quality
+    pattern: console\.log
+    message: Use Logger.log() instead of console.log for better log management
+    severity: warning
+    enabled: false
+    suggestion: "Replace with: Logger.log('info', 'category', message)"
+  - id: no-var-declarations
+    group: code_quality
+    pattern: \bvar\s+
+    message: Use 'let' or 'const' instead of 'var'
+    severity: warning
+    enabled: false
+    suggestion: Use 'let' for mutable variables, 'const' for immutable
+  - id: proper-error-handling
+    group: code_quality
+    pattern: catch\s*\([^)]*\)\s*\{\s*\}
+    message: Empty catch blocks should be avoided
+    severity: error
+    enabled: true
+    suggestion: Add proper error handling or at minimum log the error
+  - id: proper-function-naming
+    group: code_quality
+    pattern: function\s+[a-z]
+    message: Function names should start with a verb (camelCase)
+    severity: info
+    enabled: true
+    suggestion: "Use descriptive verb-based names: getUserData(), processResults()"
+  - id: no-magic-numbers
+    group: code_quality
+    pattern: \b\d{2,}\b(?!\s*(px|%|em|rem|vh|vw))
+    message: Magic numbers detected - consider using named constants
+    severity: info
+    enabled: true
+    suggestion: "Define meaningful constants: const MAX_RETRIES = 3"
+  - id: no-hardcoded-secrets
+    group: security
+    pattern: (api[_-]?key|password|secret|token)\s*[=:]\s*['"][^'"]{8,}['"]
+    message: Potential hardcoded secret detected
+    severity: critical
+    enabled: true
+    suggestion: Use environment variables or secure key management
+  - id: no-eval-usage
+    group: security
+    pattern: \beval\s*\(
+    message: eval() usage detected - security risk
+    severity: critical
+    enabled: true
+    suggestion: Avoid eval() - use safer alternatives for dynamic code execution
+  - id: no-parallel-files
+    group: architecture
+    pattern: (v[2-9]|enhanced|improved|better|new|advanced|pro|simplified|simple|basic|lite|fixed|patched|updated|revised|modified|temp|temporary|backup|copy|duplicate|clone|alt|alternative|variant|final|draft|test|experimental)[._-]
+    message: "CRITICAL: No parallel versions allowed - edit the original file directly"
+    severity: critical
+    enabled: true
+    suggestion: Debug and fix the original file instead of creating parallel versions
+  - id: debug-not-speculate
+    group: architecture
+    pattern: (maybe|probably|might be|could be|seems like|appears to be).*(?:error|issue|problem|bug)
+    message: Always debug and verify - never speculate about issues
+    severity: error
+    enabled: true
+    suggestion: Use debugging tools and verification commands to identify root causes
+  - id: no-evolutionary-names
+    group: architecture
+    pattern: (?:class|function|const|let|var)\s+\w*(?:V[2-9]|Enhanced|Improved|Better|New|Advanced|Pro|Simplified|Simple|Basic|Lite|Fixed|Patched|Updated|Revised|Modified|Temp|Temporary|Backup|Copy|Duplicate|Clone|Alt|Alternative|Variant|Final|Draft|Test|Experimental)\w*
+    message: Evolutionary naming detected - refactor original instead
+    severity: error
+    enabled: true
+    suggestion: Rename to descriptive functional name and refactor the original
+  - id: plantuml-standard-styling
+    group: plantuml
+    pattern: "@startuml.*\\n(?!.*!include _standard-style\\.puml)"
+    message: PlantUML files must include the standard styling file
+    severity: error
+    enabled: true
+    suggestion: Add '!include _standard-style.puml' after @startuml and before content
+  - id: plantuml-file-location
+    group: plantuml
+    pattern: "!include.*\\.puml"
+    message: PlantUML files should be stored in docs/puml/ directory
+    severity: warning
+    enabled: true
+    suggestion: Move .puml files to docs/puml/ and update !include paths
+  - id: plantuml-diagram-workflow
+    group: plantuml
+    pattern: (?i)(architecture|diagram|flow|sequence).*(?:diagram|chart)
+    message: "Diagrams should follow PlantUML workflow: .puml files in docs/puml/, PNG files in docs/images/"
+    severity: info
+    enabled: true
+    suggestion: 1. Create .puml file in docs/puml/ with !include _standard-style.puml 2. Generate PNG with plantuml -tpng 3.
+      Store PNG in docs/images/ 4. Reference PNG in markdown
+  - id: plantuml-readability-guidelines
+    group: plantuml
+    pattern: (?i)(too wide|barely readable|restructure.*readability)
+    message: PlantUML diagrams should prioritize readability with vertical layouts and logical grouping
+    severity: info
+    enabled: true
+    suggestion: Use 'skinparam direction top to bottom layout' and group related components in rectangles or packages
+  - id: plantuml-file-organization
+    group: plantuml
+    pattern: \.puml$
+    message: "PlantUML files should follow naming convention: component-purpose.puml"
+    severity: info
+    enabled: true
+    suggestion: Use descriptive names like workflow-sequence.puml, architecture-overview.puml
+  - id: image-reference-pattern
+    group: documentation
+    pattern: "!\\[.*\\]\\((?!docs/images/).*\\.(png|jpg|jpeg|svg)\\)"
+    message: Diagram images should be stored in docs/images/ and referenced with relative paths
+    severity: warning
+    enabled: true
+    suggestion: "Move images to docs/images/ and update markdown references: ![Description](docs/images/filename.png)"
+  - id: documentation-filename-format
+    group: documentation
+    pattern: "[A-Z][a-z]+[A-Z].*\\.md$"
+    message: "Documentation files should use kebab-case naming: feature-name.md"
+    severity: info
+    enabled: true
+    suggestion: "Rename to kebab-case: my-feature-docs.md instead of MyFeatureDocs.md"
+  - id: update-main-readme
+    group: documentation
+    pattern: (?i)readme.*(?:update|modify|change).*(?:structure|format|content)
+    message: Main README updates should maintain consistent structure and TOC
+    severity: info
+    enabled: true
+    suggestion: "Follow established README sections: Purpose, Features, Installation, Usage, Architecture"
+  - id: react-hooks-deps
+    group: framework_specific
+    pattern: useEffect\([^,]*,\s*\[\]
+    message: useEffect with empty deps array - verify if this is intentional
+    severity: info
+    enabled: false
+    suggestion: Ensure useEffect dependencies are correct to avoid bugs
+  - id: react-state-complexity
+    group: framework_specific
+    pattern: useState\([^)]*\{[^}]*\}[^)]*\)
+    message: Complex object in useState - consider useReducer or separate states
+    severity: warning
+    enabled: false
+    suggestion: Use useReducer for complex state or separate into multiple useState calls
+settings:
+  compliance:
+    excellent_threshold: 9
+    good_threshold: 7
+    warning_threshold: 5
+  risk_levels:
+    critical_violations_for_high_risk: 1
+    error_violations_for_medium_risk: 3
+    warning_violations_for_low_risk: 10
+  monitoring:
+    cache_timeout: 5000
+    max_history: 1000
+    auto_cleanup: true
+  groups:
+    show_empty_groups: false
+    collapse_disabled_groups: true
+    sort_by_severity: true
