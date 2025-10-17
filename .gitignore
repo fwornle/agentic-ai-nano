@@ -10,6 +10,7 @@ docs-env/
 
 # Logs and analysis
 logs/
+!.specstory/logs/
 *.log
 log/
 *.log.*
@@ -143,3 +144,6 @@ Desktop.ini
 sandbox/
 experiments/
 scratch/
+
+# Live logging runtime data (volatile state - not for version control)
+.specstory/trajectory/live-state.json
