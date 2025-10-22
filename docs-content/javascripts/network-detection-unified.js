@@ -1,11 +1,15 @@
 /**
  * Unified Corporate Network Detection & Content Management System
- * 
+ *
  * This replaces the problematic network-detection.js with a robust,
  * event-driven system that eliminates race conditions and provides
  * reliable corporate content loading with visual feedback.
- * 
+ *
  * Version: 2025-09-22 - Complete rewrite for reliability
+ * Version: 2025-10-22 - Fixed VPN vs direct CN detection
+ *   - Removed unreliable IP-based detection (only worked for VPN)
+ *   - Prioritized internal service checks (works for both VPN and direct CN)
+ *   - Added parallel service checking for faster, more robust detection
  */
 
 (function() {
@@ -33,15 +37,12 @@
         }
     };
     
-    const BMW_IP_PATTERNS = [
-        /^160\.46\./,    // Working BMW IP range
-        /^194\.114\./,   // BMW public IP range
-        /^195\.34\./,    // BMW public IP range
-        /^212\.204\./    // BMW public IP range
-    ];
-    
+    // Multiple internal services for robust CN detection
+    // These work equally well via VPN or direct office connection
     const BMW_INTERNAL_SERVICES = [
-        'https://contenthub.bmwgroup.net/favicon.ico'
+        'https://contenthub.bmwgroup.net/favicon.ico',
+        'https://contenthub.bmwgroup.net',
+        'https://myintranet.bmwgroup.net/favicon.ico'
     ];
     
     // ===== CORPORATE NETWORK MANAGER =====
@@ -125,25 +126,21 @@
         async _performDetection() {
             this.state.isDetecting = true;
             this.emit('detection:started');
-            
+
             try {
                 console.log('🔍 Starting corporate network detection...');
-                
-                // Method 1: Check external IP first (fastest for corporate users)
-                const ipResult = await this._checkExternalIP();
-                if (ipResult.isCorporate) {
-                    return this._setDetectionResult(true, `IP: ${ipResult.method}`, ipResult.ip);
-                }
-                
-                // Method 2: Check internal services
+
+                // PRIMARY METHOD: Check internal services (works for both VPN and direct CN)
+                console.log('🔍 Checking internal services (primary method)...');
                 const serviceResult = await this._checkInternalServices();
                 if (serviceResult.isCorporate) {
                     return this._setDetectionResult(true, `Service: ${serviceResult.method}`, serviceResult.service);
                 }
-                
+
                 // All methods failed - public network
+                console.log('❌ No internal services reachable - detected as public network');
                 return this._setDetectionResult(false, 'All checks failed', 'public');
-                
+
             } catch (error) {
                 console.error('❌ Detection failed with error:', error);
                 return this._setDetectionResult(false, 'Error', error.message);
@@ -152,54 +149,40 @@
             }
         }
         
-        async _checkExternalIP() {
-            try {
-                console.log('🌐 Checking external IP...');
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 3000);
-                
-                const response = await fetch('https://api.ipify.org?format=json', {
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-                
-                if (!response.ok) throw new Error(`IP service returned ${response.status}`);
-                
-                const data = await response.json();
-                const ip = data.ip;
-                
-                console.log(`🌐 External IP: ${ip}`);
-                
-                for (const pattern of BMW_IP_PATTERNS) {
-                    if (pattern.test(ip)) {
-                        console.log(`✅ IP ${ip} matches BMW pattern: ${pattern}`);
-                        return { isCorporate: true, method: pattern.toString(), ip };
-                    }
-                }
-                
-                return { isCorporate: false, method: 'IP check', ip };
-                
-            } catch (error) {
-                console.log('❌ External IP check failed:', error.message);
-                return { isCorporate: false, method: 'IP check failed', ip: null };
-            }
-        }
+        // REMOVED: IP-based detection was unreliable
+        // - Only worked for VPN IPs (160.46.x.x pattern)
+        // - Failed for direct office connections
+        // - Internal service check is more robust and works for both VPN and direct CN
         
         async _checkInternalServices() {
-            console.log('🔍 Checking internal services...');
-            
-            for (const serviceUrl of BMW_INTERNAL_SERVICES) {
+            console.log('🔍 Checking internal services (robust method for VPN + direct CN)...');
+
+            // Try all services in parallel for faster detection
+            const serviceChecks = BMW_INTERNAL_SERVICES.map(async (serviceUrl) => {
                 try {
                     const result = await this._pingService(serviceUrl);
                     if (result.success) {
                         console.log(`✅ Internal service reachable: ${serviceUrl}`);
-                        return { isCorporate: true, method: 'Internal service', service: serviceUrl };
+                        return { success: true, serviceUrl };
                     }
+                    console.log(`❌ Service unreachable: ${serviceUrl}`);
+                    return { success: false, serviceUrl };
                 } catch (error) {
                     console.log(`❌ Service check failed for ${serviceUrl}:`, error.message);
+                    return { success: false, serviceUrl, error: error.message };
                 }
+            });
+
+            // Wait for all checks to complete
+            const results = await Promise.all(serviceChecks);
+
+            // If ANY service is reachable, we're on corporate network
+            const successfulService = results.find(r => r.success);
+            if (successfulService) {
+                return { isCorporate: true, method: 'Internal service', service: successfulService.serviceUrl };
             }
-            
+
+            console.log('❌ No internal services reachable');
             return { isCorporate: false, method: 'Service check', service: null };
         }
         
