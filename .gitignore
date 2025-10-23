@@ -144,7 +144,19 @@ Desktop.ini
 sandbox/
 experiments/
 scratch/
-.data/
+
+# MCP Memory LevelDB (volatile runtime data)
+# Ignore binary database files, but track JSON exports
+.data/knowledge-graph/
+.data/knowledge.db
+.data/knowledge.db-shm
+.data/knowledge.db-wal
+.data/backups/
+
+# Track knowledge exports (git-reviewable JSON)
+!.data/
+!.data/knowledge-export/
+!.data/knowledge-config.json
 
 # Live logging runtime data (volatile state - not for version control)
 .specstory/trajectory/live-state.json
