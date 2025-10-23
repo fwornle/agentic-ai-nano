@@ -144,6 +144,7 @@ Desktop.ini
 sandbox/
 experiments/
 scratch/
+.data/
 
 # Live logging runtime data (volatile state - not for version control)
 .specstory/trajectory/live-state.json
