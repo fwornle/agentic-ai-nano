@@ -1,16 +1,16 @@
 # Classification Status - nano-degree
 
-**Generated**: 2025-11-04T11:43:31.286Z
-**Total Sessions**: 191
-**Total Decisions**: 2145
+**Generated**: 2025-11-05T10:16:58.212Z
+**Total Sessions**: 192
+**Total Decisions**: 2147
 
 ---
 
 ## Overall Statistics
 
-- **Total Prompt Sets Classified**: 2145
+- **Total Prompt Sets Classified**: 2147
 - **Classified as CODING**: 1416 (66%)
-- **Classified as LOCAL**: 729 (34%)
+- **Classified as LOCAL**: 731 (34%)
 
 ### Classification Method Distribution
 
@@ -21,7 +21,7 @@ Click on a classification method to view all sessions decided by that layer.
 | 0 | [Session Filter](#layer-0-session-filter) | 700 | 33% |
 | 1 | [Path Analysis](#layer-1-path-analysis) | 109 | 5% |
 | 2 | [Keyword Matching](#layer-2-keyword-matching) | 428 | 20% |
-| 3 | [Embedding Search](#layer-3-embedding-search) | 908 | 42% |
+| 3 | [Embedding Search](#layer-3-embedding-search) | 910 | 42% |
 | 4 | [Semantic Analysis](#layer-4-semantic-analysis) | 0 | 0% |
 
 **Average Processing Time**: 37ms
@@ -627,6 +627,7 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-10-28_1100-1200_g9b30a](2025-10-28_1100-1200_g9b30a.md)** - 3 local decisions
 - **[2025-10-30_1500-1600_g9b30a](2025-10-30_1500-1600_g9b30a.md)** - 4 local decisions
 - **[2025-11-04_1200-1300_g9b30a](2025-11-04_1200-1300_g9b30a.md)** - 2 local decisions
+- **[2025-11-05_1100-1200_g9b30a](2025-11-05_1100-1200_g9b30a.md)** - 2 local decisions
 
 ### Layer 4: Semantic Analysis
 
@@ -829,6 +830,7 @@ Complete chronological list of all classification sessions.
 - **2025-10-28_1100-1200_g9b30a** - 5 decisions ([CODING: 2](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-10-28_1100-1200_g9b30a_from-nano-degree.md), [LOCAL: 3](2025-10-28_1100-1200_g9b30a.md))
 - **2025-10-30_1500-1600_g9b30a** - 4 decisions ([LOCAL: 4](2025-10-30_1500-1600_g9b30a.md))
 - **2025-11-04_1200-1300_g9b30a** - 2 decisions ([LOCAL: 2](2025-11-04_1200-1300_g9b30a.md))
+- **2025-11-05_1100-1200_g9b30a** - 2 decisions ([LOCAL: 2](2025-11-05_1100-1200_g9b30a.md))
 
 ---
 
