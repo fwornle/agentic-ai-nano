@@ -1,16 +1,16 @@
 # Classification Status - nano-degree
 
-**Generated**: 2025-11-05T10:16:58.212Z
-**Total Sessions**: 192
-**Total Decisions**: 2147
+**Generated**: 2025-11-07T15:31:09.528Z
+**Total Sessions**: 195
+**Total Decisions**: 2153
 
 ---
 
 ## Overall Statistics
 
-- **Total Prompt Sets Classified**: 2147
-- **Classified as CODING**: 1416 (66%)
-- **Classified as LOCAL**: 731 (34%)
+- **Total Prompt Sets Classified**: 2153
+- **Classified as CODING**: 1418 (66%)
+- **Classified as LOCAL**: 735 (34%)
 
 ### Classification Method Distribution
 
@@ -20,8 +20,8 @@ Click on a classification method to view all sessions decided by that layer.
 |-------|--------|-----------|------------|
 | 0 | [Session Filter](#layer-0-session-filter) | 700 | 33% |
 | 1 | [Path Analysis](#layer-1-path-analysis) | 109 | 5% |
-| 2 | [Keyword Matching](#layer-2-keyword-matching) | 428 | 20% |
-| 3 | [Embedding Search](#layer-3-embedding-search) | 910 | 42% |
+| 2 | [Keyword Matching](#layer-2-keyword-matching) | 430 | 20% |
+| 3 | [Embedding Search](#layer-3-embedding-search) | 914 | 42% |
 | 4 | [Semantic Analysis](#layer-4-semantic-analysis) | 0 | 0% |
 
 **Average Processing Time**: 37ms
@@ -437,6 +437,7 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-10-22_1300-1400_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-10-22_1300-1400_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-10-23_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-10-23_0700-0800_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-10-28_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-10-28_1100-1200_g9b30a_from-nano-degree.md)** - 2 coding decisions
+- **[2025-11-07_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-07_0900-1000_g9b30a_from-nano-degree.md)** - 2 coding decisions
 
 ### Layer 3: Embedding Search
 
@@ -628,6 +629,8 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-10-30_1500-1600_g9b30a](2025-10-30_1500-1600_g9b30a.md)** - 4 local decisions
 - **[2025-11-04_1200-1300_g9b30a](2025-11-04_1200-1300_g9b30a.md)** - 2 local decisions
 - **[2025-11-05_1100-1200_g9b30a](2025-11-05_1100-1200_g9b30a.md)** - 2 local decisions
+- **[2025-11-07_1000-1100_g9b30a](2025-11-07_1000-1100_g9b30a.md)** - 2 local decisions
+- **[2025-11-07_1600-1700_g9b30a](2025-11-07_1600-1700_g9b30a.md)** - 2 local decisions
 
 ### Layer 4: Semantic Analysis
 
@@ -831,6 +834,9 @@ Complete chronological list of all classification sessions.
 - **2025-10-30_1500-1600_g9b30a** - 4 decisions ([LOCAL: 4](2025-10-30_1500-1600_g9b30a.md))
 - **2025-11-04_1200-1300_g9b30a** - 2 decisions ([LOCAL: 2](2025-11-04_1200-1300_g9b30a.md))
 - **2025-11-05_1100-1200_g9b30a** - 2 decisions ([LOCAL: 2](2025-11-05_1100-1200_g9b30a.md))
+- **2025-11-07_0900-1000_g9b30a** - 2 decisions ([CODING: 2](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-07_0900-1000_g9b30a_from-nano-degree.md))
+- **2025-11-07_1000-1100_g9b30a** - 2 decisions ([LOCAL: 2](2025-11-07_1000-1100_g9b30a.md))
+- **2025-11-07_1600-1700_g9b30a** - 2 decisions ([LOCAL: 2](2025-11-07_1600-1700_g9b30a.md))
 
 ---
 
