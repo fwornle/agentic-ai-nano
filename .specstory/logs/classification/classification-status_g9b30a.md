@@ -1,16 +1,16 @@
 # Classification Status - nano-degree
 
-**Generated**: 2025-11-10T06:34:04.883Z
-**Total Sessions**: 197
-**Total Decisions**: 2224
+**Generated**: 2025-11-10T06:37:28.688Z
+**Total Sessions**: 191
+**Total Decisions**: 2052
 
 ---
 
 ## Overall Statistics
 
-- **Total Prompt Sets Classified**: 2224
-- **Classified as CODING**: 1463 (66%)
-- **Classified as LOCAL**: 761 (34%)
+- **Total Prompt Sets Classified**: 2052
+- **Classified as CODING**: 1360 (66%)
+- **Classified as LOCAL**: 692 (34%)
 
 ### Classification Method Distribution
 
@@ -18,13 +18,13 @@ Click on a classification method to view all sessions decided by that layer.
 
 | Layer | Method | Decisions | Percentage |
 |-------|--------|-----------|------------|
-| 0 | [Session Filter](#layer-0-session-filter) | 700 | 31% |
-| 1 | [Path Analysis](#layer-1-path-analysis) | 140 | 6% |
-| 2 | [Keyword Matching](#layer-2-keyword-matching) | 440 | 20% |
-| 3 | [Embedding Search](#layer-3-embedding-search) | 944 | 42% |
+| 0 | [Session Filter](#layer-0-session-filter) | 653 | 32% |
+| 1 | [Path Analysis](#layer-1-path-analysis) | 118 | 6% |
+| 2 | [Keyword Matching](#layer-2-keyword-matching) | 407 | 20% |
+| 3 | [Embedding Search](#layer-3-embedding-search) | 874 | 43% |
 | 4 | [Semantic Analysis](#layer-4-semantic-analysis) | 0 | 0% |
 
-**Average Processing Time**: 38ms
+**Average Processing Time**: 40ms
 
 ---
 
@@ -108,13 +108,10 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-14_1900-2000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_1900-2000_g9b30a_from-nano-degree.md)** - 5 coding decisions
 - **[2025-09-14_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_2200-2300_g9b30a_from-nano-degree.md)** - 6 coding decisions
 - **[2025-09-15_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0600-0700_g9b30a_from-nano-degree.md)** - 1 coding decisions
-- **[2025-09-15_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md)** - 8 coding decisions
 - **[2025-09-15_2000-2100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_2000-2100_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-16_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0600-0700_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-16_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0700-0800_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-16_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0800-0900_g9b30a_from-nano-degree.md)** - 1 coding decisions
-- **[2025-09-16_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md)** - 13 coding decisions
-- **[2025-09-16_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md)** - 8 coding decisions
 - **[2025-09-16_1200-1300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1200-1300_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-16_1300-1400_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1300-1400_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-16_1400-1500_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1400-1500_g9b30a_from-nano-degree.md)** - 2 coding decisions
@@ -141,7 +138,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-20_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_0800-0900_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-20_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_0900-1000_g9b30a_from-nano-degree.md)** - 5 coding decisions
 - **[2025-09-20_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1000-1100_g9b30a_from-nano-degree.md)** - 1 coding decisions
-- **[2025-09-20_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-20_1200-1300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1200-1300_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-20_1500-1600_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1500-1600_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-20_1600-1700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1600-1700_g9b30a_from-nano-degree.md)** - 1 coding decisions
@@ -151,7 +147,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-20_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_2200-2300_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-21_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0600-0700_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-21_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0700-0800_g9b30a_from-nano-degree.md)** - 5 coding decisions
-- **[2025-09-21_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-21_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0900-1000_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-21_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1000-1100_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-21_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1100-1200_g9b30a_from-nano-degree.md)** - 1 coding decisions
@@ -177,7 +172,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-23_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-23_0600-0700_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-23_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-23_0700-0800_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-24_1200-1300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-24_1200-1300_g9b30a_from-nano-degree.md)** - 1 coding decisions
-- **[2025-09-25_1800-1900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-25_2100-2200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_2100-2200_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-25_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_2200-2300_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-26_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-26_0900-1000_g9b30a_from-nano-degree.md)** - 1 coding decisions
@@ -247,12 +241,9 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-14_1900-2000_g9b30a](2025-09-14_1900-2000_g9b30a.md)** - 1 local decisions
 - **[2025-09-14_2200-2300_g9b30a](2025-09-14_2200-2300_g9b30a.md)** - 2 local decisions
 - **[2025-09-15_0600-0700_g9b30a](2025-09-15_0600-0700_g9b30a.md)** - 1 local decisions
-- **[2025-09-15_0700-0800_g9b30a](2025-09-15_0700-0800_g9b30a.md)** - 3 local decisions
 - **[2025-09-15_0800-0900_g9b30a](2025-09-15_0800-0900_g9b30a.md)** - 1 local decisions
 - **[2025-09-16_0600-0700_g9b30a](2025-09-16_0600-0700_g9b30a.md)** - 3 local decisions
 - **[2025-09-16_0700-0800_g9b30a](2025-09-16_0700-0800_g9b30a.md)** - 1 local decisions
-- **[2025-09-16_1000-1100_g9b30a](2025-09-16_1000-1100_g9b30a.md)** - 3 local decisions
-- **[2025-09-16_1100-1200_g9b30a](2025-09-16_1100-1200_g9b30a.md)** - 3 local decisions
 - **[2025-09-16_1200-1300_g9b30a](2025-09-16_1200-1300_g9b30a.md)** - 1 local decisions
 - **[2025-09-16_1300-1400_g9b30a](2025-09-16_1300-1400_g9b30a.md)** - 1 local decisions
 - **[2025-09-16_1400-1500_g9b30a](2025-09-16_1400-1500_g9b30a.md)** - 1 local decisions
@@ -279,7 +270,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-20_2200-2300_g9b30a](2025-09-20_2200-2300_g9b30a.md)** - 1 local decisions
 - **[2025-09-21_0600-0700_g9b30a](2025-09-21_0600-0700_g9b30a.md)** - 1 local decisions
 - **[2025-09-21_0700-0800_g9b30a](2025-09-21_0700-0800_g9b30a.md)** - 2 local decisions
-- **[2025-09-21_0800-0900_g9b30a](2025-09-21_0800-0900_g9b30a.md)** - 1 local decisions
 - **[2025-09-21_1100-1200_g9b30a](2025-09-21_1100-1200_g9b30a.md)** - 1 local decisions
 - **[2025-09-21_1300-1400_g9b30a](2025-09-21_1300-1400_g9b30a.md)** - 3 local decisions
 - **[2025-09-21_1400-1500_g9b30a](2025-09-21_1400-1500_g9b30a.md)** - 1 local decisions
@@ -302,12 +292,9 @@ Sessions grouped by the classification layer that made the final decision.
 
 - **[2025-09-14_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_2200-2300_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-15_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0600-0700_g9b30a_from-nano-degree.md)** - 1 coding decisions
-- **[2025-09-15_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md)** - 9 coding decisions
 - **[2025-09-16_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0600-0700_g9b30a_from-nano-degree.md)** - 5 coding decisions
 - **[2025-09-16_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0700-0800_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-16_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0800-0900_g9b30a_from-nano-degree.md)** - 1 coding decisions
-- **[2025-09-16_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md)** - 6 coding decisions
-- **[2025-09-16_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-16_1200-1300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1200-1300_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-16_1300-1400_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1300-1400_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-16_1400-1500_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1400-1500_g9b30a_from-nano-degree.md)** - 6 coding decisions
@@ -321,7 +308,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-18_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-18_0800-0900_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-19_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-19_0600-0700_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-19_1300-1400_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-19_1300-1400_g9b30a_from-nano-degree.md)** - 3 coding decisions
-- **[2025-09-25_1800-1900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-25_2100-2200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_2100-2200_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-28_1300-1400_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-28_1300-1400_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-10-06_2100-2200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-10-06_2100-2200_g9b30a_from-nano-degree.md)** - 3 coding decisions
@@ -355,13 +341,10 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-14_1900-2000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_1900-2000_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-14_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_2200-2300_g9b30a_from-nano-degree.md)** - 6 coding decisions
 - **[2025-09-15_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0600-0700_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-15_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-15_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0800-0900_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-15_2000-2100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_2000-2100_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-16_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0600-0700_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-16_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0700-0800_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-16_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md)** - 9 coding decisions
-- **[2025-09-16_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md)** - 7 coding decisions
 - **[2025-09-16_1300-1400_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1300-1400_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-16_1900-2000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1900-2000_g9b30a_from-nano-degree.md)** - 5 coding decisions
 - **[2025-09-16_2000-2100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_2000-2100_g9b30a_from-nano-degree.md)** - 5 coding decisions
@@ -383,7 +366,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-20_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_0800-0900_g9b30a_from-nano-degree.md)** - 6 coding decisions
 - **[2025-09-20_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_0900-1000_g9b30a_from-nano-degree.md)** - 14 coding decisions
 - **[2025-09-20_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1000-1100_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-20_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md)** - 8 coding decisions
 - **[2025-09-20_1200-1300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1200-1300_g9b30a_from-nano-degree.md)** - 10 coding decisions
 - **[2025-09-20_1500-1600_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1500-1600_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-20_1600-1700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1600-1700_g9b30a_from-nano-degree.md)** - 4 coding decisions
@@ -394,7 +376,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-20_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_2200-2300_g9b30a_from-nano-degree.md)** - 6 coding decisions
 - **[2025-09-21_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0600-0700_g9b30a_from-nano-degree.md)** - 8 coding decisions
 - **[2025-09-21_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0700-0800_g9b30a_from-nano-degree.md)** - 14 coding decisions
-- **[2025-09-21_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-21_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0900-1000_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-21_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1000-1100_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-21_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1100-1200_g9b30a_from-nano-degree.md)** - 4 coding decisions
@@ -422,7 +403,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-23_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-23_0700-0800_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-23_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-23_0800-0900_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-24_1200-1300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-24_1200-1300_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-25_1800-1900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-25_2100-2200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_2100-2200_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-25_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_2200-2300_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-26_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-26_0900-1000_g9b30a_from-nano-degree.md)** - 2 coding decisions
@@ -450,7 +430,7 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-10-28_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-10-28_1100-1200_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-11-07_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-07_0900-1000_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-11-10_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0600-0700_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-11-10_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md)** - 2 coding decisions
+- **[2025-11-10_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md)** - 3 coding decisions
 
 ### Layer 3: Embedding Search
 
@@ -465,9 +445,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-12_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-12_0900-1000_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-14_1500-1600_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_1500-1600_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-15_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0600-0700_g9b30a_from-nano-degree.md)** - 1 coding decisions
-- **[2025-09-15_0700-0800_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-16_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-16_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md)** - 1 coding decisions
 - **[2025-09-17_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-17_0600-0700_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-17_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-17_0800-0900_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-18_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-18_1000-1100_g9b30a_from-nano-degree.md)** - 2 coding decisions
@@ -483,7 +460,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-20_1800-1900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1800-1900_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-20_2200-2300_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_2200-2300_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-21_0600-0700_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0600-0700_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-21_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-21_1000-1100_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1000-1100_g9b30a_from-nano-degree.md)** - 3 coding decisions
 - **[2025-09-21_1100-1200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1100-1200_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-21_1400-1500_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1400-1500_g9b30a_from-nano-degree.md)** - 1 coding decisions
@@ -495,7 +471,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-22_2100-2200_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-22_2100-2200_g9b30a_from-nano-degree.md)** - 6 coding decisions
 - **[2025-09-23_0800-0900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-23_0800-0900_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-23_0900-1000_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-23_0900-1000_g9b30a_from-nano-degree.md)** - 2 coding decisions
-- **[2025-09-25_1800-1900_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-28_1300-1400_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-28_1300-1400_g9b30a_from-nano-degree.md)** - 2 coding decisions
 - **[2025-09-28_1400-1500_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-28_1400-1500_g9b30a_from-nano-degree.md)** - 4 coding decisions
 - **[2025-09-28_1500-1600_g9b30a](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-28_1500-1600_g9b30a_from-nano-degree.md)** - 6 coding decisions
@@ -568,10 +543,7 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-14_1700-1800_g9b30a](2025-09-14_1700-1800_g9b30a.md)** - 1 local decisions
 - **[2025-09-14_1800-1900_g9b30a](2025-09-14_1800-1900_g9b30a.md)** - 1 local decisions
 - **[2025-09-14_2200-2300_g9b30a](2025-09-14_2200-2300_g9b30a.md)** - 4 local decisions
-- **[2025-09-15_0700-0800_g9b30a](2025-09-15_0700-0800_g9b30a.md)** - 9 local decisions
 - **[2025-09-16_0700-0800_g9b30a](2025-09-16_0700-0800_g9b30a.md)** - 1 local decisions
-- **[2025-09-16_1000-1100_g9b30a](2025-09-16_1000-1100_g9b30a.md)** - 15 local decisions
-- **[2025-09-16_1100-1200_g9b30a](2025-09-16_1100-1200_g9b30a.md)** - 7 local decisions
 - **[2025-09-16_1900-2000_g9b30a](2025-09-16_1900-2000_g9b30a.md)** - 6 local decisions
 - **[2025-09-17_0600-0700_g9b30a](2025-09-17_0600-0700_g9b30a.md)** - 2 local decisions
 - **[2025-09-17_0800-0900_g9b30a](2025-09-17_0800-0900_g9b30a.md)** - 1 local decisions
@@ -588,7 +560,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-19_1900-2000_g9b30a](2025-09-19_1900-2000_g9b30a.md)** - 13 local decisions
 - **[2025-09-19_2000-2100_g9b30a](2025-09-19_2000-2100_g9b30a.md)** - 5 local decisions
 - **[2025-09-20_0900-1000_g9b30a](2025-09-20_0900-1000_g9b30a.md)** - 10 local decisions
-- **[2025-09-20_1100-1200_g9b30a](2025-09-20_1100-1200_g9b30a.md)** - 9 local decisions
 - **[2025-09-20_1200-1300_g9b30a](2025-09-20_1200-1300_g9b30a.md)** - 6 local decisions
 - **[2025-09-20_1600-1700_g9b30a](2025-09-20_1600-1700_g9b30a.md)** - 4 local decisions
 - **[2025-09-20_1700-1800_g9b30a](2025-09-20_1700-1800_g9b30a.md)** - 3 local decisions
@@ -596,7 +567,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-20_2200-2300_g9b30a](2025-09-20_2200-2300_g9b30a.md)** - 10 local decisions
 - **[2025-09-21_0600-0700_g9b30a](2025-09-21_0600-0700_g9b30a.md)** - 13 local decisions
 - **[2025-09-21_0700-0800_g9b30a](2025-09-21_0700-0800_g9b30a.md)** - 21 local decisions
-- **[2025-09-21_0800-0900_g9b30a](2025-09-21_0800-0900_g9b30a.md)** - 11 local decisions
 - **[2025-09-21_1000-1100_g9b30a](2025-09-21_1000-1100_g9b30a.md)** - 9 local decisions
 - **[2025-09-21_1100-1200_g9b30a](2025-09-21_1100-1200_g9b30a.md)** - 1 local decisions
 - **[2025-09-21_1200-1300_g9b30a](2025-09-21_1200-1300_g9b30a.md)** - 3 local decisions
@@ -618,7 +588,6 @@ Sessions grouped by the classification layer that made the final decision.
 - **[2025-09-23_0900-1000_g9b30a](2025-09-23_0900-1000_g9b30a.md)** - 7 local decisions
 - **[2025-09-23_1000-1100_g9b30a](2025-09-23_1000-1100_g9b30a.md)** - 3 local decisions
 - **[2025-09-24_1200-1300_g9b30a](2025-09-24_1200-1300_g9b30a.md)** - 2 local decisions
-- **[2025-09-25_1800-1900_g9b30a](2025-09-25_1800-1900_g9b30a.md)** - 8 local decisions
 - **[2025-09-26_0900-1000_g9b30a](2025-09-26_0900-1000_g9b30a.md)** - 1 local decisions
 - **[2025-09-28_0800-0900_g9b30a](2025-09-28_0800-0900_g9b30a.md)** - 1 local decisions
 - **[2025-09-28_1200-1300_g9b30a](2025-09-28_1200-1300_g9b30a.md)** - 1 local decisions
@@ -738,14 +707,11 @@ Complete chronological list of all classification sessions.
 - **2025-09-14_1900-2000_g9b30a** - 7 decisions ([CODING: 6](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_1900-2000_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-14_1900-2000_g9b30a.md))
 - **2025-09-14_2200-2300_g9b30a** - 20 decisions ([CODING: 14](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-14_2200-2300_g9b30a_from-nano-degree.md), [LOCAL: 6](2025-09-14_2200-2300_g9b30a.md))
 - **2025-09-15_0600-0700_g9b30a** - 6 decisions ([CODING: 5](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0600-0700_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-15_0600-0700_g9b30a.md))
-- **2025-09-15_0700-0800_g9b30a** - 34 decisions ([CODING: 22](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md), [LOCAL: 12](2025-09-15_0700-0800_g9b30a.md))
 - **2025-09-15_0800-0900_g9b30a** - 2 decisions ([CODING: 1](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0800-0900_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-15_0800-0900_g9b30a.md))
 - **2025-09-15_2000-2100_g9b30a** - 2 decisions ([CODING: 2](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_2000-2100_g9b30a_from-nano-degree.md))
 - **2025-09-16_0600-0700_g9b30a** - 12 decisions ([CODING: 9](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0600-0700_g9b30a_from-nano-degree.md), [LOCAL: 3](2025-09-16_0600-0700_g9b30a.md))
 - **2025-09-16_0700-0800_g9b30a** - 9 decisions ([CODING: 7](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0700-0800_g9b30a_from-nano-degree.md), [LOCAL: 2](2025-09-16_0700-0800_g9b30a.md))
 - **2025-09-16_0800-0900_g9b30a** - 2 decisions ([CODING: 2](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0800-0900_g9b30a_from-nano-degree.md))
-- **2025-09-16_1000-1100_g9b30a** - 48 decisions ([CODING: 30](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md), [LOCAL: 18](2025-09-16_1000-1100_g9b30a.md))
-- **2025-09-16_1100-1200_g9b30a** - 30 decisions ([CODING: 20](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md), [LOCAL: 10](2025-09-16_1100-1200_g9b30a.md))
 - **2025-09-16_1200-1300_g9b30a** - 4 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1200-1300_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-16_1200-1300_g9b30a.md))
 - **2025-09-16_1300-1400_g9b30a** - 11 decisions ([CODING: 10](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1300-1400_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-16_1300-1400_g9b30a.md))
 - **2025-09-16_1400-1500_g9b30a** - 9 decisions ([CODING: 8](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1400-1500_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-16_1400-1500_g9b30a.md))
@@ -774,7 +740,6 @@ Complete chronological list of all classification sessions.
 - **2025-09-20_0800-0900_g9b30a** - 9 decisions ([CODING: 8](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_0800-0900_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-20_0800-0900_g9b30a.md))
 - **2025-09-20_0900-1000_g9b30a** - 33 decisions ([CODING: 21](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_0900-1000_g9b30a_from-nano-degree.md), [LOCAL: 12](2025-09-20_0900-1000_g9b30a.md))
 - **2025-09-20_1000-1100_g9b30a** - 3 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1000-1100_g9b30a_from-nano-degree.md))
-- **2025-09-20_1100-1200_g9b30a** - 21 decisions ([CODING: 12](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md), [LOCAL: 9](2025-09-20_1100-1200_g9b30a.md))
 - **2025-09-20_1200-1300_g9b30a** - 21 decisions ([CODING: 14](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1200-1300_g9b30a_from-nano-degree.md), [LOCAL: 7](2025-09-20_1200-1300_g9b30a.md))
 - **2025-09-20_1500-1600_g9b30a** - 3 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1500-1600_g9b30a_from-nano-degree.md))
 - **2025-09-20_1600-1700_g9b30a** - 12 decisions ([CODING: 7](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1600-1700_g9b30a_from-nano-degree.md), [LOCAL: 5](2025-09-20_1600-1700_g9b30a.md))
@@ -785,7 +750,6 @@ Complete chronological list of all classification sessions.
 - **2025-09-20_2200-2300_g9b30a** - 21 decisions ([CODING: 10](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_2200-2300_g9b30a_from-nano-degree.md), [LOCAL: 11](2025-09-20_2200-2300_g9b30a.md))
 - **2025-09-21_0600-0700_g9b30a** - 27 decisions ([CODING: 13](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0600-0700_g9b30a_from-nano-degree.md), [LOCAL: 14](2025-09-21_0600-0700_g9b30a.md))
 - **2025-09-21_0700-0800_g9b30a** - 42 decisions ([CODING: 19](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0700-0800_g9b30a_from-nano-degree.md), [LOCAL: 23](2025-09-21_0700-0800_g9b30a.md))
-- **2025-09-21_0800-0900_g9b30a** - 19 decisions ([CODING: 7](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md), [LOCAL: 12](2025-09-21_0800-0900_g9b30a.md))
 - **2025-09-21_0900-1000_g9b30a** - 3 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0900-1000_g9b30a_from-nano-degree.md))
 - **2025-09-21_1000-1100_g9b30a** - 15 decisions ([CODING: 6](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1000-1100_g9b30a_from-nano-degree.md), [LOCAL: 9](2025-09-21_1000-1100_g9b30a.md))
 - **2025-09-21_1100-1200_g9b30a** - 9 decisions ([CODING: 7](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_1100-1200_g9b30a_from-nano-degree.md), [LOCAL: 2](2025-09-21_1100-1200_g9b30a.md))
@@ -815,7 +779,6 @@ Complete chronological list of all classification sessions.
 - **2025-09-23_0900-1000_g9b30a** - 9 decisions ([CODING: 2](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-23_0900-1000_g9b30a_from-nano-degree.md), [LOCAL: 7](2025-09-23_0900-1000_g9b30a.md))
 - **2025-09-23_1000-1100_g9b30a** - 3 decisions ([LOCAL: 3](2025-09-23_1000-1100_g9b30a.md))
 - **2025-09-24_1200-1300_g9b30a** - 6 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-24_1200-1300_g9b30a_from-nano-degree.md), [LOCAL: 3](2025-09-24_1200-1300_g9b30a.md))
-- **2025-09-25_1800-1900_g9b30a** - 21 decisions ([CODING: 13](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md), [LOCAL: 8](2025-09-25_1800-1900_g9b30a.md))
 - **2025-09-25_2100-2200_g9b30a** - 3 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_2100-2200_g9b30a_from-nano-degree.md))
 - **2025-09-25_2200-2300_g9b30a** - 3 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_2200-2300_g9b30a_from-nano-degree.md))
 - **2025-09-26_0900-1000_g9b30a** - 4 decisions ([CODING: 3](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-26_0900-1000_g9b30a_from-nano-degree.md), [LOCAL: 1](2025-09-26_0900-1000_g9b30a.md))
@@ -854,7 +817,7 @@ Complete chronological list of all classification sessions.
 - **2025-11-07_1000-1100_g9b30a** - 4 decisions ([LOCAL: 4](2025-11-07_1000-1100_g9b30a.md))
 - **2025-11-07_1600-1700_g9b30a** - 4 decisions ([LOCAL: 4](2025-11-07_1600-1700_g9b30a.md))
 - **2025-11-10_0600-0700_g9b30a** - 7 decisions ([CODING: 4](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0600-0700_g9b30a_from-nano-degree.md), [LOCAL: 3](2025-11-10_0600-0700_g9b30a.md))
-- **2025-11-10_0700-0800_g9b30a** - 10 decisions ([CODING: 8](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md), [LOCAL: 2](2025-11-10_0700-0800_g9b30a.md))
+- **2025-11-10_0700-0800_g9b30a** - 11 decisions ([CODING: 9](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md), [LOCAL: 2](2025-11-10_0700-0800_g9b30a.md))
 
 ---
 
@@ -2116,48 +2079,6 @@ Individual prompt sets with clickable links to their classification details.
 
 - [ps_2025-09-15T04:47:37.641Z](../../../history/2025-09-15_0600-0700_g9b30a.md#ps_2025-09-15T04:47:37.641Z) ([classification](2025-09-15_0600-0700_g9b30a.md#prompt-set-ps_2025-09-15T04:47:37.641Z)) - Layer session-filter
 
-### 2025-09-15_0700-0800_g9b30a
-
-#### CODING Decisions (22)
-
-- [ps_2025-09-15T05:08:20.429Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:08:20.429Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:08:20.429Z)) - Layer session-filter
-- [ps_2025-09-15T05:12:52.128Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:12:52.128Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:12:52.128Z)) - Layer keyword
-- [ps_2025-09-15T05:23:41.088Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:23:41.088Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:23:41.088Z)) - Layer session-filter
-- [ps_2025-09-15T05:28:59.388Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:28:59.388Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:28:59.388Z)) - Layer session-filter
-- [ps_2025-09-15T05:33:53.878Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:33:53.878Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:33:53.878Z)) - Layer session-filter
-- [ps_2025-09-15T05:40:17.069Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:40:17.069Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:40:17.069Z)) - Layer session-filter
-- [ps_2025-09-15T05:44:10.159Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:44:10.159Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:44:10.159Z)) - Layer session-filter
-- [ps_2025-09-15T05:46:15.915Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:46:15.915Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:46:15.915Z)) - Layer session-filter
-- [ps_2025-09-15T05:51:50.308Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_2025-09-15T05:51:50.308Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-15T05:51:50.308Z)) - Layer session-filter
-- [ps_1757912900429](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757912900429) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757912900429)) - Layer path
-- [ps_1757913172128](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757913172128) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757913172128)) - Layer keyword
-- [ps_1757913237276](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757913237276) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757913237276)) - Layer path
-- [ps_1757913821088](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757913821088) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757913821088)) - Layer path
-- [ps_1757914139388](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757914139388) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757914139388)) - Layer path
-- [ps_1757914433878](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757914433878) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757914433878)) - Layer embedding
-- [ps_1757914495409](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757914495409) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757914495409)) - Layer path
-- [ps_1757914817069](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757914817069) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757914817069)) - Layer path
-- [ps_1757914998604](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757914998604) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757914998604)) - Layer embedding
-- [ps_1757915050159](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757915050159) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757915050159)) - Layer path
-- [ps_1757915175915](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757915175915) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757915175915)) - Layer path
-- [ps_1757915310245](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757915310245) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757915310245)) - Layer path
-- [ps_1757915510308](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#ps_1757915510308) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-15_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1757915510308)) - Layer keyword
-
-#### LOCAL Decisions (12)
-
-- [ps_2025-09-15T05:11:42.832Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:11:42.832Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:11:42.832Z)) - Layer embedding
-- [ps_2025-09-15T05:13:57.276Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:13:57.276Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:13:57.276Z)) - Layer session-filter
-- [ps_2025-09-15T05:26:17.813Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:26:17.813Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:26:17.813Z)) - Layer embedding
-- [ps_2025-09-15T05:32:37.763Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:32:37.763Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:32:37.763Z)) - Layer embedding
-- [ps_2025-09-15T05:34:55.409Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:34:55.409Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:34:55.409Z)) - Layer session-filter
-- [ps_2025-09-15T05:39:03.734Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:39:03.734Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:39:03.734Z)) - Layer embedding
-- [ps_2025-09-15T05:43:18.604Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:43:18.604Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:43:18.604Z)) - Layer embedding
-- [ps_2025-09-15T05:48:30.245Z](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_2025-09-15T05:48:30.245Z) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_2025-09-15T05:48:30.245Z)) - Layer session-filter
-- [ps_1757913102832](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_1757913102832) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_1757913102832)) - Layer embedding
-- [ps_1757913977813](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_1757913977813) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_1757913977813)) - Layer embedding
-- [ps_1757914357763](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_1757914357763) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_1757914357763)) - Layer embedding
-- [ps_1757914743734](../../../history/2025-09-15_0700-0800_g9b30a.md#ps_1757914743734) ([classification](2025-09-15_0700-0800_g9b30a.md#prompt-set-ps_1757914743734)) - Layer embedding
-
 ### 2025-09-15_0800-0900_g9b30a
 
 #### CODING Decisions (1)
@@ -2218,100 +2139,6 @@ Individual prompt sets with clickable links to their classification details.
 
 - [ps_2025-09-16T06:01:28.448Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_0800-0900_g9b30a_from-nano-degree.md#ps_2025-09-16T06:01:28.448Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T06:01:28.448Z)) - Layer session-filter
 - [ps_1758002488448](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_0800-0900_g9b30a_from-nano-degree.md#ps_1758002488448) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_1758002488448)) - Layer path
-
-### 2025-09-16_1000-1100_g9b30a
-
-#### CODING Decisions (30)
-
-- [ps_2025-09-16T08:01:24.385Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:01:24.385Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:01:24.385Z)) - Layer session-filter
-- [ps_2025-09-16T08:03:14.427Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:03:14.427Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:03:14.427Z)) - Layer session-filter
-- [ps_2025-09-16T08:04:47.308Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:04:47.308Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:04:47.308Z)) - Layer session-filter
-- [ps_2025-09-16T08:05:39.597Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:05:39.597Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:05:39.597Z)) - Layer session-filter
-- [ps_2025-09-16T08:12:05.095Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:12:05.095Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:12:05.095Z)) - Layer session-filter
-- [ps_2025-09-16T08:17:08.886Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:17:08.886Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:17:08.886Z)) - Layer session-filter
-- [ps_2025-09-16T08:21:21.224Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:21:21.224Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:21:21.224Z)) - Layer session-filter
-- [ps_2025-09-16T08:22:34.004Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:22:34.004Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:22:34.004Z)) - Layer session-filter
-- [ps_2025-09-16T08:29:40.452Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:29:40.452Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:29:40.452Z)) - Layer session-filter
-- [ps_2025-09-16T08:31:41.957Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:31:41.957Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:31:41.957Z)) - Layer session-filter
-- [ps_2025-09-16T08:38:13.515Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:38:13.515Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:38:13.515Z)) - Layer session-filter
-- [ps_2025-09-16T08:43:33.116Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:43:33.116Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:43:33.116Z)) - Layer session-filter
-- [ps_2025-09-16T08:57:45.945Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_2025-09-16T08:57:45.945Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T08:57:45.945Z)) - Layer session-filter
-- [ps_1758009684385](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758009684385) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758009684385)) - Layer path
-- [ps_1758009780964](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758009780964) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758009780964)) - Layer embedding
-- [ps_1758009794427](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758009794427) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758009794427)) - Layer keyword
-- [ps_1758009887308](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758009887308) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758009887308)) - Layer embedding
-- [ps_1758009939597](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758009939597) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758009939597)) - Layer keyword
-- [ps_1758009995072](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758009995072) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758009995072)) - Layer path
-- [ps_1758010325095](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758010325095) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758010325095)) - Layer path
-- [ps_1758010628886](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758010628886) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758010628886)) - Layer keyword
-- [ps_1758010881224](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758010881224) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758010881224)) - Layer keyword
-- [ps_1758010954004](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758010954004) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758010954004)) - Layer keyword
-- [ps_1758011060348](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758011060348) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758011060348)) - Layer keyword
-- [ps_1758011202888](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758011202888) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758011202888)) - Layer keyword
-- [ps_1758011380452](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758011380452) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758011380452)) - Layer path
-- [ps_1758011501957](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758011501957) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758011501957)) - Layer keyword
-- [ps_1758011893515](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758011893515) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758011893515)) - Layer keyword
-- [ps_1758012213116](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758012213116) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758012213116)) - Layer path
-- [ps_1758013065945](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#ps_1758013065945) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758013065945)) - Layer path
-
-#### LOCAL Decisions (18)
-
-- [ps_2025-09-16T08:03:00.964Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:03:00.964Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:03:00.964Z)) - Layer embedding
-- [ps_2025-09-16T08:05:06.166Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:05:06.166Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:05:06.166Z)) - Layer embedding
-- [ps_2025-09-16T08:06:35.072Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:06:35.072Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:06:35.072Z)) - Layer session-filter
-- [ps_2025-09-16T08:11:25.064Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:11:25.064Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:11:25.064Z)) - Layer embedding
-- [ps_2025-09-16T08:22:05.721Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:22:05.721Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:22:05.721Z)) - Layer embedding
-- [ps_2025-09-16T08:24:20.348Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:24:20.348Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:24:20.348Z)) - Layer session-filter
-- [ps_2025-09-16T08:24:22.948Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:24:22.948Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:24:22.948Z)) - Layer embedding
-- [ps_2025-09-16T08:26:42.888Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:26:42.888Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:26:42.888Z)) - Layer session-filter
-- [ps_2025-09-16T08:28:13.113Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:28:13.113Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:28:13.113Z)) - Layer embedding
-- [ps_2025-09-16T08:40:43.366Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:40:43.366Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:40:43.366Z)) - Layer embedding
-- [ps_2025-09-16T08:56:40.596Z](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_2025-09-16T08:56:40.596Z) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_2025-09-16T08:56:40.596Z)) - Layer embedding
-- [ps_1758009906166](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_1758009906166) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_1758009906166)) - Layer embedding
-- [ps_1758010285064](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_1758010285064) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_1758010285064)) - Layer embedding
-- [ps_1758010925721](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_1758010925721) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_1758010925721)) - Layer embedding
-- [ps_1758011062948](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_1758011062948) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_1758011062948)) - Layer embedding
-- [ps_1758011293113](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_1758011293113) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_1758011293113)) - Layer embedding
-- [ps_1758012043366](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_1758012043366) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_1758012043366)) - Layer embedding
-- [ps_1758013000596](../../../history/2025-09-16_1000-1100_g9b30a.md#ps_1758013000596) ([classification](2025-09-16_1000-1100_g9b30a.md#prompt-set-ps_1758013000596)) - Layer embedding
-
-### 2025-09-16_1100-1200_g9b30a
-
-#### CODING Decisions (20)
-
-- [ps_2025-09-16T09:04:56.421Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:04:56.421Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:04:56.421Z)) - Layer session-filter
-- [ps_2025-09-16T09:07:30.837Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:07:30.837Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:07:30.837Z)) - Layer session-filter
-- [ps_2025-09-16T09:16:14.670Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:16:14.670Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:16:14.670Z)) - Layer session-filter
-- [ps_2025-09-16T09:18:08.826Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:18:08.826Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:18:08.826Z)) - Layer session-filter
-- [ps_2025-09-16T09:23:17.613Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:23:17.613Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:23:17.613Z)) - Layer session-filter
-- [ps_2025-09-16T09:26:40.099Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:26:40.099Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:26:40.099Z)) - Layer session-filter
-- [ps_2025-09-16T09:29:29.952Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:29:29.952Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:29:29.952Z)) - Layer session-filter
-- [ps_2025-09-16T09:38:08.564Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-16T09:38:08.564Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-16T09:38:08.564Z)) - Layer session-filter
-- [ps_1758013496421](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758013496421) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758013496421)) - Layer keyword
-- [ps_1758013531600](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758013531600) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758013531600)) - Layer embedding
-- [ps_1758013650837](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758013650837) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758013650837)) - Layer keyword
-- [ps_1758013752936](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758013752936) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758013752936)) - Layer path
-- [ps_1758014174670](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758014174670) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758014174670)) - Layer keyword
-- [ps_1758014288826](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758014288826) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758014288826)) - Layer keyword
-- [ps_1758014597613](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758014597613) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758014597613)) - Layer keyword
-- [ps_1758014800099](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758014800099) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758014800099)) - Layer keyword
-- [ps_1758014969952](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758014969952) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758014969952)) - Layer path
-- [ps_1758015488564](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758015488564) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758015488564)) - Layer path
-- [ps_1758016073943](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758016073943) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758016073943)) - Layer keyword
-- [ps_1758016179568](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#ps_1758016179568) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-16_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758016179568)) - Layer path
-
-#### LOCAL Decisions (10)
-
-- [ps_2025-09-16T09:05:31.600Z](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_2025-09-16T09:05:31.600Z) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_2025-09-16T09:05:31.600Z)) - Layer embedding
-- [ps_2025-09-16T09:09:12.936Z](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_2025-09-16T09:09:12.936Z) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_2025-09-16T09:09:12.936Z)) - Layer session-filter
-- [ps_2025-09-16T09:12:22.176Z](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_2025-09-16T09:12:22.176Z) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_2025-09-16T09:12:22.176Z)) - Layer embedding
-- [ps_2025-09-16T09:16:55.043Z](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_2025-09-16T09:16:55.043Z) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_2025-09-16T09:16:55.043Z)) - Layer embedding
-- [ps_2025-09-16T09:27:33.705Z](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_2025-09-16T09:27:33.705Z) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_2025-09-16T09:27:33.705Z)) - Layer embedding
-- [ps_2025-09-16T09:47:53.943Z](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_2025-09-16T09:47:53.943Z) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_2025-09-16T09:47:53.943Z)) - Layer session-filter
-- [ps_2025-09-16T09:49:39.568Z](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_2025-09-16T09:49:39.568Z) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_2025-09-16T09:49:39.568Z)) - Layer session-filter
-- [ps_1758013942176](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_1758013942176) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_1758013942176)) - Layer embedding
-- [ps_1758014215043](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_1758014215043) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_1758014215043)) - Layer embedding
-- [ps_1758014853705](../../../history/2025-09-16_1100-1200_g9b30a.md#ps_1758014853705) ([classification](2025-09-16_1100-1200_g9b30a.md#prompt-set-ps_1758014853705)) - Layer embedding
 
 ### 2025-09-16_1200-1300_g9b30a
 
@@ -2962,35 +2789,6 @@ Individual prompt sets with clickable links to their classification details.
 - [ps_1758358706952](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1000-1100_g9b30a_from-nano-degree.md#ps_1758358706952) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758358706952)) - Layer keyword
 - [ps_1758358706952](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1000-1100_g9b30a_from-nano-degree.md#ps_1758358706952) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1000-1100_g9b30a_from-nano-degree.md#prompt-set-ps_1758358706952)) - Layer keyword
 
-### 2025-09-20_1100-1200_g9b30a
-
-#### CODING Decisions (12)
-
-- [ps_2025-09-20T09:53:18.558Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-20T09:53:18.558Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-20T09:53:18.558Z)) - Layer session-filter
-- [ps_2025-09-20T09:55:40.771Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-20T09:55:40.771Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-20T09:55:40.771Z)) - Layer session-filter
-- [ps_2025-09-20T09:57:33.582Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-20T09:57:33.582Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-20T09:57:33.582Z)) - Layer session-filter
-- [ps_2025-09-20T09:58:28.383Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_2025-09-20T09:58:28.383Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-20T09:58:28.383Z)) - Layer session-filter
-- [ps_1758361998558](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758361998558) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758361998558)) - Layer keyword
-- [ps_1758362140771](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758362140771) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758362140771)) - Layer keyword
-- [ps_1758362253582](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758362253582) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758362253582)) - Layer keyword
-- [ps_1758362308383](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758362308383) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758362308383)) - Layer keyword
-- [ps_1758361998558](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758361998558) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758361998558)) - Layer keyword
-- [ps_1758362140771](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758362140771) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758362140771)) - Layer keyword
-- [ps_1758362253582](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758362253582) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758362253582)) - Layer keyword
-- [ps_1758362308383](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#ps_1758362308383) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-20_1100-1200_g9b30a_from-nano-degree.md#prompt-set-ps_1758362308383)) - Layer keyword
-
-#### LOCAL Decisions (9)
-
-- [ps_2025-09-20T09:54:51.687Z](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_2025-09-20T09:54:51.687Z) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_2025-09-20T09:54:51.687Z)) - Layer embedding
-- [ps_2025-09-20T09:56:21.376Z](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_2025-09-20T09:56:21.376Z) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_2025-09-20T09:56:21.376Z)) - Layer embedding
-- [ps_2025-09-20T09:57:56.626Z](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_2025-09-20T09:57:56.626Z) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_2025-09-20T09:57:56.626Z)) - Layer embedding
-- [ps_1758362091687](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_1758362091687) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_1758362091687)) - Layer embedding
-- [ps_1758362181376](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_1758362181376) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_1758362181376)) - Layer embedding
-- [ps_1758362276626](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_1758362276626) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_1758362276626)) - Layer embedding
-- [ps_1758362091687](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_1758362091687) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_1758362091687)) - Layer embedding
-- [ps_1758362181376](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_1758362181376) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_1758362181376)) - Layer embedding
-- [ps_1758362276626](../../../history/2025-09-20_1100-1200_g9b30a.md#ps_1758362276626) ([classification](2025-09-20_1100-1200_g9b30a.md#prompt-set-ps_1758362276626)) - Layer embedding
-
 ### 2025-09-20_1200-1300_g9b30a
 
 #### CODING Decisions (14)
@@ -3223,33 +3021,6 @@ Individual prompt sets with clickable links to their classification details.
 - [ps_1758434069908](../../../history/2025-09-21_0700-0800_g9b30a.md#ps_1758434069908) ([classification](2025-09-21_0700-0800_g9b30a.md#prompt-set-ps_1758434069908)) - Layer embedding
 - [ps_1758434115466](../../../history/2025-09-21_0700-0800_g9b30a.md#ps_1758434115466) ([classification](2025-09-21_0700-0800_g9b30a.md#prompt-set-ps_1758434115466)) - Layer embedding
 - [ps_1758434126441](../../../history/2025-09-21_0700-0800_g9b30a.md#ps_1758434126441) ([classification](2025-09-21_0700-0800_g9b30a.md#prompt-set-ps_1758434126441)) - Layer embedding
-
-### 2025-09-21_0800-0900_g9b30a
-
-#### CODING Decisions (7)
-
-- [ps_2025-09-21T06:13:18.873Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#ps_2025-09-21T06:13:18.873Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-21T06:13:18.873Z)) - Layer session-filter
-- [ps_1758435198873](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#ps_1758435198873) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_1758435198873)) - Layer keyword
-- [ps_1758435295709](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#ps_1758435295709) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_1758435295709)) - Layer keyword
-- [ps_1758435057104](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#ps_1758435057104) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_1758435057104)) - Layer embedding
-- [ps_1758435198873](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#ps_1758435198873) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_1758435198873)) - Layer keyword
-- [ps_1758435295709](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#ps_1758435295709) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_1758435295709)) - Layer keyword
-- [ps_1758435057104](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#ps_1758435057104) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-21_0800-0900_g9b30a_from-nano-degree.md#prompt-set-ps_1758435057104)) - Layer embedding
-
-#### LOCAL Decisions (12)
-
-- [ps_2025-09-21T06:13:18.873Z](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_2025-09-21T06:13:18.873Z) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_2025-09-21T06:13:18.873Z)) - Layer embedding
-- [ps_2025-09-21T06:13:23.000Z](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_2025-09-21T06:13:23.000Z) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_2025-09-21T06:13:23.000Z)) - Layer embedding
-- [ps_2025-09-21T06:14:55.709Z](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_2025-09-21T06:14:55.709Z) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_2025-09-21T06:14:55.709Z)) - Layer session-filter
-- [ps_2025-09-21T06:10:46.235Z](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_2025-09-21T06:10:46.235Z) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_2025-09-21T06:10:46.235Z)) - Layer embedding
-- [ps_2025-09-21T06:10:57.104Z](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_2025-09-21T06:10:57.104Z) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_2025-09-21T06:10:57.104Z)) - Layer embedding
-- [ps_2025-09-21T06:12:36.715Z](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_2025-09-21T06:12:36.715Z) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_2025-09-21T06:12:36.715Z)) - Layer embedding
-- [ps_1758435203000](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_1758435203000) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_1758435203000)) - Layer embedding
-- [ps_1758435046235](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_1758435046235) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_1758435046235)) - Layer embedding
-- [ps_1758435156715](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_1758435156715) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_1758435156715)) - Layer embedding
-- [ps_1758435203000](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_1758435203000) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_1758435203000)) - Layer embedding
-- [ps_1758435046235](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_1758435046235) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_1758435046235)) - Layer embedding
-- [ps_1758435156715](../../../history/2025-09-21_0800-0900_g9b30a.md#ps_1758435156715) ([classification](2025-09-21_0800-0900_g9b30a.md#prompt-set-ps_1758435156715)) - Layer embedding
 
 ### 2025-09-21_0900-1000_g9b30a
 
@@ -3755,35 +3526,6 @@ Individual prompt sets with clickable links to their classification details.
 - [ps_2025-09-24T10:23:16.063Z](../../../history/2025-09-24_1200-1300_g9b30a.md#ps_2025-09-24T10:23:16.063Z) ([classification](2025-09-24_1200-1300_g9b30a.md#prompt-set-ps_2025-09-24T10:23:16.063Z)) - Layer session-filter
 - [ps_1758709396063](../../../history/2025-09-24_1200-1300_g9b30a.md#ps_1758709396063) ([classification](2025-09-24_1200-1300_g9b30a.md#prompt-set-ps_1758709396063)) - Layer embedding
 - [ps_1758709396063](../../../history/2025-09-24_1200-1300_g9b30a.md#ps_1758709396063) ([classification](2025-09-24_1200-1300_g9b30a.md#prompt-set-ps_1758709396063)) - Layer embedding
-
-### 2025-09-25_1800-1900_g9b30a
-
-#### CODING Decisions (13)
-
-- [ps_2025-09-25T16:51:39.758Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_2025-09-25T16:51:39.758Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-25T16:51:39.758Z)) - Layer session-filter
-- [ps_2025-09-25T16:56:00.991Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_2025-09-25T16:56:00.991Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-25T16:56:00.991Z)) - Layer session-filter
-- [ps_2025-09-25T16:58:32.738Z](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_2025-09-25T16:58:32.738Z) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_2025-09-25T16:58:32.738Z)) - Layer session-filter
-- [ps_1758819099758](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819099758) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819099758)) - Layer keyword
-- [ps_1758819360991](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819360991) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819360991)) - Layer path
-- [ps_1758819444292](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819444292) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819444292)) - Layer embedding
-- [ps_1758819502903](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819502903) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819502903)) - Layer embedding
-- [ps_1758819512738](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819512738) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819512738)) - Layer keyword
-- [ps_1758819099758](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819099758) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819099758)) - Layer path
-- [ps_1758819360991](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819360991) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819360991)) - Layer path
-- [ps_1758819444292](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819444292) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819444292)) - Layer embedding
-- [ps_1758819502903](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819502903) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819502903)) - Layer embedding
-- [ps_1758819512738](file:///Users/q284340/Agentic/coding/.specstory/history/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#ps_1758819512738) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-09-25_1800-1900_g9b30a_from-nano-degree.md#prompt-set-ps_1758819512738)) - Layer keyword
-
-#### LOCAL Decisions (8)
-
-- [ps_2025-09-25T16:54:53.108Z](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_2025-09-25T16:54:53.108Z) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_2025-09-25T16:54:53.108Z)) - Layer embedding
-- [ps_2025-09-25T16:57:24.292Z](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_2025-09-25T16:57:24.292Z) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_2025-09-25T16:57:24.292Z)) - Layer embedding
-- [ps_2025-09-25T16:58:22.903Z](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_2025-09-25T16:58:22.903Z) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_2025-09-25T16:58:22.903Z)) - Layer embedding
-- [ps_2025-09-25T16:58:26.878Z](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_2025-09-25T16:58:26.878Z) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_2025-09-25T16:58:26.878Z)) - Layer embedding
-- [ps_1758819293108](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_1758819293108) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_1758819293108)) - Layer embedding
-- [ps_1758819506878](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_1758819506878) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_1758819506878)) - Layer embedding
-- [ps_1758819293108](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_1758819293108) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_1758819293108)) - Layer embedding
-- [ps_1758819506878](../../../history/2025-09-25_1800-1900_g9b30a.md#ps_1758819506878) ([classification](2025-09-25_1800-1900_g9b30a.md#prompt-set-ps_1758819506878)) - Layer embedding
 
 ### 2025-09-25_2100-2200_g9b30a
 
@@ -4511,7 +4253,7 @@ Individual prompt sets with clickable links to their classification details.
 
 ### 2025-11-10_0700-0800_g9b30a
 
-#### CODING Decisions (8)
+#### CODING Decisions (9)
 
 - [ps_1762755455506](file:///Users/q284340/Agentic/coding/.specstory/history/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#ps_1762755455506) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1762755455506)) - Layer embedding
 - [ps_1762755455506](file:///Users/q284340/Agentic/coding/.specstory/history/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#ps_1762755455506) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1762755455506)) - Layer keyword
@@ -4521,6 +4263,7 @@ Individual prompt sets with clickable links to their classification details.
 - [ps_1762755415944](file:///Users/q284340/Agentic/coding/.specstory/history/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#ps_1762755415944) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1762755415944)) - Layer path
 - [ps_1762755455506](file:///Users/q284340/Agentic/coding/.specstory/history/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#ps_1762755455506) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1762755455506)) - Layer path
 - [ps_1762755788477](file:///Users/q284340/Agentic/coding/.specstory/history/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#ps_1762755788477) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1762755788477)) - Layer path
+- [ps_1762756623857](file:///Users/q284340/Agentic/coding/.specstory/history/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#ps_1762756623857) ([classification](file:///Users/q284340/Agentic/coding/.specstory/logs/classification/2025-11-10_0700-0800_g9b30a_from-nano-degree.md#prompt-set-ps_1762756623857)) - Layer keyword
 
 #### LOCAL Decisions (2)
 
