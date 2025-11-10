@@ -157,6 +157,20 @@ constraints:
     severity: info
     enabled: true
     suggestion: "Follow established README sections: Purpose, Features, Installation, Usage, Architecture"
+  - id: no-ascii-art-in-docs
+    group: documentation
+    pattern: "[┌┐└┘│─├┤┬┴┼▲▼◄►]"
+    message: "CRITICAL: ASCII/line art detected in documentation - use PlantUML diagrams instead. You MUST invoke documentation-style skill FIRST"
+    severity: error
+    enabled: true
+    suggestion: "1. Invoke Skill tool with skill='documentation-style' 2. Create .puml file in docs/puml/ 3. Generate PNG with plantuml 4. Reference image in markdown"
+  - id: documentation-style-skill-required
+    group: documentation
+    pattern: "(?:```(?:plantuml|puml|mermaid)|@startuml|flowchart|sequenceDiagram|Architecture|## Architecture)"
+    message: "CRITICAL: Creating diagrams or architecture docs requires documentation-style skill. You MUST invoke Skill tool with skill='documentation-style' BEFORE modifying docs"
+    severity: error
+    enabled: true
+    suggestion: "STOP: Invoke the documentation-style skill first: Use Skill tool with parameter skill='documentation-style' to load proper workflow and standards"
   - id: react-hooks-deps
     group: framework_specific
     pattern: useEffect\([^,]*,\s*\[\]
