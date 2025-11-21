@@ -1009,18 +1009,32 @@
     // Fallback auto-load for corporate content when needed and authorized
     document.addEventListener('DOMContentLoaded', async () => {
         console.log('🔐 Corporate content loader initialized');
-        
+
+        // CRITICAL: Check if unified system is active and disable old loader
+        // The unified system (network-detection-unified.js) handles everything independently
+        if (window.CorporateNetworkController) {
+            console.log('🔄 Unified Corporate Network Controller detected - old loader disabled');
+            console.log('✅ Unified system will handle all corporate content loading');
+            return; // Exit early - unified system takes over completely
+        }
+
         // Check if current page needs corporate content
         if (window.CorporateContentLoader.isCorporateContentNeeded()) {
             console.log('🔐 Page needs corporate content, checking network authorization...');
-            
+
             // Wait a bit for network detection to complete
             setTimeout(async () => {
+                // Double-check unified system hasn't loaded in the meantime
+                if (window.CorporateNetworkController) {
+                    console.log('🔄 Unified system loaded during wait - old loader aborting');
+                    return;
+                }
+
                 // Check if network detection has authorized corporate content access
                 const isAuthorized = window.isCorporateNetworkDetected || false;
-                
+
                 console.log('🔍 Network authorization check:', isAuthorized);
-                
+
                 if (isAuthorized) {
                     console.log('✅ Corporate network detected - loading corporate content');
                     try {

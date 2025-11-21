@@ -948,17 +948,27 @@
     
     // Handle navigation
     let lastUrl = location.href;
+    let lastPathname = location.pathname;
     const observer = new MutationObserver(() => {
         const url = location.href;
-        if (url !== lastUrl) {
+        const pathname = location.pathname;
+
+        // Only reinitialize if the pathname changed, NOT just the hash
+        // Hash changes are handled by the setupDetailedContentSwitching method
+        if (pathname !== lastPathname) {
             lastUrl = url;
-            console.log('🔄 URL changed, reinitializing...');
-            
+            lastPathname = pathname;
+            console.log('🔄 Pathname changed, reinitializing...');
+
             // Reset and reinitialize
             window.CorporateNetworkController.isInitialized = false;
             setTimeout(() => {
                 window.CorporateNetworkController.initialize();
             }, 100);
+        } else if (url !== lastUrl) {
+            // Hash-only change - don't reinitialize, just update lastUrl
+            lastUrl = url;
+            console.log('🔗 Hash changed (not reinitializing):', location.hash);
         }
     });
     
