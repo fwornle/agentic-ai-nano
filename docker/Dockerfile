@@ -90,14 +90,14 @@ ARG GITHUB_MIRROR=${COMMON_AF}/external-github-com
 ARG NODE_MIRROR="${DDAD_AF}/external-nodejs"
 
 # Install uv (Python package manager and build tool.)
-ARG UV_VERSION=0.8.12
+ARG UV_VERSION=0.9.30
 RUN curl ${GITHUB_MIRROR}/astral-sh/uv/releases/download/${UV_VERSION}/uv-x86_64-unknown-linux-gnu.tar.gz \
   | tar -xzv -C /usr/local/bin/ --strip-components=1
 ENV UV_PYTHON_INSTALL_MIRROR=${GITHUB_MIRROR}/astral-sh/python-build-standalone/releases/download
 ENV UV_DEFAULT_INDEX=${COMMON_AF}/api/pypi/external-pypi-org/simple
 
 # Node
-ARG NODE_VERSION=22.17.0
+ARG NODE_VERSION=24.13.0
 RUN cd /tmp && \
     wget "${NODE_MIRROR}/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" && \
     tar -xf node-v${NODE_VERSION}-linux-x64.tar.xz -C /opt && \
@@ -107,19 +107,19 @@ RUN cd /tmp && \
     ln -s /opt/node-v${NODE_VERSION}-linux-x64/bin/npx /usr/local/bin/npx
 
 # fd
-ARG FD_VERSION=10.2.0
+ARG FD_VERSION=10.3.0
 RUN cd /tmp && \
     wget ${GITHUB_MIRROR}/sharkdp/fd/releases/download/v${FD_VERSION}/fd-musl_${FD_VERSION}_amd64.deb && \
     dpkg -i fd-musl_${FD_VERSION}_amd64.deb
 
 # gh
-ARG GH_VERSION=2.75.0
+ARG GH_VERSION=2.86.0
 RUN cd /tmp && \
     wget ${GITHUB_MIRROR}/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.deb && \
     dpkg -i gh_${GH_VERSION}_linux_amd64.deb
 
 # eza
-ARG EZA_VERSION=0.22.0
+ARG EZA_VERSION=0.23.4
 RUN cd /tmp && \
     wget ${GITHUB_MIRROR}/eza-community/eza/releases/download/v${EZA_VERSION}/eza_x86_64-unknown-linux-gnu.tar.gz && \
     tar -xf eza_x86_64-unknown-linux-gnu.tar.gz -C /usr/local/bin/ && \
@@ -128,31 +128,17 @@ RUN cd /tmp && \
 # ruff
 RUN UV_TOOL_BIN_DIR=/usr/local/bin/ \
     UV_TOOL_DIR=/usr/local/share/uv/tools/ \
-    uv tool install ruff==0.11.2
+    uv tool install ruff==0.15.0
 
 # llm
 RUN UV_TOOL_BIN_DIR=/usr/local/bin/ \
     UV_TOOL_DIR=/usr/local/share/uv/tools/ \
-    uv tool install llm==0.27.1
+    uv tool install llm==0.28
 
 # install bmw certificates
 RUN wget https://trustbundle.bmwgroup.net/BMW_Trusted_Certificates_Latest.pem \
     -O /usr/local/share/ca-certificates/BMW_Trusted_Certificates_Latest.crt \
     && update-ca-certificates --fresh
-
-# coding assistant
-ARG CA_VERSION=235965d7ad85a09683c6dacada1ef2f4157259ee
-RUN cd /tmp && \
-    mkdir /opt/coding_assistant && \
-    wget ${GITHUB_MIRROR}/msc94/coding_assistant/archive/${CA_VERSION}.tar.gz && \
-    tar -C /opt/coding_assistant --strip-components=1 -xf ${CA_VERSION}.tar.gz
-RUN echo '#!/bin/bash' > /usr/local/bin/coding-assistant
-RUN chmod +x /usr/local/bin/coding-assistant
-RUN echo 'export SSL_CERT_FILE=/usr/local/share/ca-certificates/BMW_Trusted_Certificates_Latest.crt'\
-    >> /usr/local/bin/coding-assistant
-RUN echo 'uv run --project /opt/coding_assistant coding-assistant --no-sandbox --model openai/claude-sonnet-4 --expert-model openai/claude-sonnet-4 "$@"' \
-    >> /usr/local/bin/coding-assistant
-RUN mkdir -p /opt/coding_assistant && chown ${user}:${user} /opt/coding_assistant
 
 # # Install Python dependencies
 # ARG py_reqs="requirements.txt"
@@ -178,13 +164,6 @@ RUN mkdir -p /opt/coding_assistant && chown ${user}:${user} /opt/coding_assistan
 #     && apt-get update \
 #     && apt-get install -y \
 #         gh
-
-# ###############################################################################
-# Setup Ollama
-ARG ollama_version="0.11.5"
-ARG ollama_url="${COMMON_AF}/external-github-com/ollama/ollama/releases/download/v${ollama_version}/ollama-linux-amd64.tgz"
-RUN curl -L ${ollama_url} | tar -C /usr -xvz
-# ENV OLLAMA_HOST="127.0.0.1:11434"
 
 # # ###############################################################################
 # # Setup Docker daemon
