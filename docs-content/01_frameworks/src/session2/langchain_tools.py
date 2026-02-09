@@ -15,8 +15,8 @@ import math
 
 class CalculatorTool(BaseTool):
     """Enhanced calculator tool for LangChain"""
-    name = "calculator"
-    description = "Perform mathematical calculations and expressions"
+    name: str = "calculator"
+    description: str = "Perform mathematical calculations and expressions"
 
     def _run(self, expression: str) -> str:
         """Execute the tool"""
@@ -77,12 +77,12 @@ email_tool = StructuredTool.from_function(
 
 class NewsAPITool(BaseTool):
     """Tool for fetching news from NewsAPI"""
-    name = "news_search"
-    description = "Search for recent news articles on a given topic"
+    name: str = "news_search"
+    description: str = "Search for recent news articles on a given topic"
+    api_key: str
     
-    def __init__(self, api_key: str):
-        super().__init__()
-        self.api_key = api_key
+    def __init__(self, api_key: str, **kwargs):
+        super().__init__(api_key=api_key, **kwargs)
 
     def _run(self, query: str, num_articles: int = 5) -> str:
         """Fetch news articles"""

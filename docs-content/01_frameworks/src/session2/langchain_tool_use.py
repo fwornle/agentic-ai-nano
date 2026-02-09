@@ -89,8 +89,8 @@ class LangChainToolAgent:
 # Custom domain-specific tool
 class DatabaseQueryTool(BaseTool):
     """Tool for querying a database"""
-    name = "database_query"
-    description = "Query database for information about customers, orders, or products"
+    name: str = "database_query"
+    description: str = "Query database for information about customers, orders, or products"
     
     def _run(self, query: str, table: str) -> str:
         """Execute database query (simulated)"""
