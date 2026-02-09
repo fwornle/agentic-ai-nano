@@ -25,9 +25,9 @@ tiktoken>=0.5.0
 transformers>=4.30.0
 
 # Additional utilities
-langchain>=0.0.350
-langchain-community>=0.0.10
-langchain-openai>=0.0.5
+langchain>=0.1.8
+langchain-community>=0.0.24
+langchain-openai>=0.0.8
 
 # Development and testing
 pytest>=7.4.0
