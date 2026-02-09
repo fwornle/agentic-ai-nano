@@ -3,7 +3,7 @@ langchain>=0.1.8
 langchain-community>=0.0.24
 langchain-openai>=0.0.8
 langchain-anthropic>=0.0.6
-langchain-experimental>=0.0.50
+langchain-experimental>=0.3.4
 
 # API and web frameworks
 fastapi>=0.104.0

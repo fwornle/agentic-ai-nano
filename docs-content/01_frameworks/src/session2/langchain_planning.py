@@ -4,7 +4,7 @@ Planning Agent implementation using LangChain framework.
 """
 
 from langchain.agents import Tool, AgentType, initialize_agent
-from langchain.experimental.plan_and_execute import PlanAndExecuteAgentExecutor, load_agent_executor, load_chat_planner
+from langchain_experimental.plan_and_execute import PlanAndExecute, load_agent_executor, load_chat_planner
 from langchain.memory import ConversationBufferMemory
 from typing import List, Dict
 from datetime import datetime
@@ -25,7 +25,7 @@ class LangChainPlanningAgent:
         self.executor = load_agent_executor(llm, tools, verbose=True)
         
         # Create plan-and-execute agent
-        self.agent = PlanAndExecuteAgentExecutor(
+        self.agent = PlanAndExecute(
             planner=self.planner,
             executor=self.executor,
             verbose=True
