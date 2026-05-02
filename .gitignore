@@ -161,3 +161,6 @@ scratch/
 # Live logging runtime data (volatile state - not for version control)
 .specstory/trajectory/live-state.json
 .specstory/logs/*.jsonl
+
+# Private history repo — chat logs live in a separate <name>-history repo
+.specstory/history/
